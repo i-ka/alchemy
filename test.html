@@ -11,12 +11,10 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			
-			$(".select").mouseover(function(){$(this).attr("id","selected")});
-		  
+			$(".select").mouseover(function(){$(this).attr("id","selected").css("cursor","move")}); 
 			$(".select").mouseleave(function(){$(this).removeAttr("id","selected")});
 				
 			$(".select").draggable({
-				cursor: "move",
 				revert: true
 			});
 			 	 
