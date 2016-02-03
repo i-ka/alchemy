@@ -1,0 +1,99 @@
+body {
+	font-family: Verdana, Helvetica, Arial;
+	font-size: 11pt;
+	color: #DCDCDC;
+	background-color: #111111;
+	margin: 0;
+	padding: 0;
+}
+
+/* Шапка */
+#header {	
+	border-bottom: 1px solid #323537;
+	width: 100%;
+	margin: 10px 0;
+}
+
+/*Левый блок*/
+#left {
+	float: left;									/*Левые блоки размещаем слева*/
+	width: 250px;									/*Установка ширины*/
+	padding-bottom: 50px;
+}
+
+/*Правый блок*/
+#right {
+	float: right;									/*Правые блоки размещаем справа*/
+	width: 250px;									/*Установка ширины*/
+	padding-bottom: 50px;
+}
+
+/*Центральный блок*/
+#center {
+	margin-left: 250px;								/*Отступ слева*/
+	margin-right: 250px;							/*Отступ справа*/
+	padding-bottom: 50px;
+}
+
+/*Параметры блоков*/
+.block {
+	background-color: #1C1C1C;
+	margin: 0 10px 5px;
+	padding: 15px;
+	border: 1px dashed #323537;
+	text-align: center;
+}
+
+#center .block {
+	float: left;
+}
+
+/*UI*/
+.selected {
+	color: green;	
+	border-style:solid;
+	border-width:1px;
+	padding: 2px;
+	margin-top: 2px;
+	font-size: 10pt;
+	width: 95%;
+}
+
+.select {
+	border-style:solid;
+	border-width:1px;
+	padding: 2px;
+	margin-top: 2px;
+	font-size: 10pt;
+	width: 95%;
+}
+
+#drop1 {
+	border-style:solid;
+	border-width:1px;
+	padding: 2px;
+	font-size: 10pt;
+	width: 95%;
+}
+
+#drop2 {
+	border-style:solid;
+	border-width:1px;
+	padding: 2px;
+	font-size: 10pt;
+	width: 95%;
+}
+
+.clear {
+	clear: both;									/*Отменяем позиционирование (влияние float)*/
+}
+
+/*Подвал*/
+div#footer {
+	position: fixed;
+	left: 0; bottom: 0;
+	width: 100%;
+	border-top: 1px solid #323537;
+	margin-top: 25px;
+	padding: 5px 0;
+}
