@@ -15,7 +15,8 @@
 			$(".select").mouseleave(function(){$(this).removeAttr("id","selected")});
 				
 			$(".select").draggable({
-				revert: true
+				revert: true,
+				revertDuration: 0
 			});
 			 	 
 			$("#drop1").droppable({
