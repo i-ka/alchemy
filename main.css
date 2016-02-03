@@ -7,35 +7,35 @@ body {
 	padding: 0;
 }
 
-/* Шапка */
+/*Header*/
 #header {	
 	border-bottom: 1px solid #323537;
 	width: 100%;
 	margin: 10px 0;
 }
 
-/*Левый блок*/
+/*Left block*/
 #left {
-	float: left;									/*Левые блоки размещаем слева*/
-	width: 250px;									/*Установка ширины*/
+	float: left;									/*Left blocks going left*/
+	width: 250px;
 	padding-bottom: 50px;
 }
 
-/*Правый блок*/
+/*Right block*/
 #right {
-	float: right;									/*Правые блоки размещаем справа*/
-	width: 250px;									/*Установка ширины*/
+	float: right;									/*Right blocks going right*/
+	width: 250px;
 	padding-bottom: 50px;
 }
 
 /*Центральный блок*/
 #center {
-	margin-left: 250px;								/*Отступ слева*/
-	margin-right: 250px;							/*Отступ справа*/
+	margin-left: 250px;								/*Left indent*/
+	margin-right: 250px;							/*Right indent*/
 	padding-bottom: 50px;
 }
 
-/*Параметры блоков*/
+/*Block parameters*/
 .block {
 	background-color: #1C1C1C;
 	margin: 0 10px 5px;
@@ -49,8 +49,7 @@ body {
 }
 
 /*UI*/
-.selected {
-	color: green;	
+.select {
 	border-style:solid;
 	border-width:1px;
 	padding: 2px;
@@ -59,13 +58,8 @@ body {
 	width: 95%;
 }
 
-.select {
-	border-style:solid;
-	border-width:1px;
-	padding: 2px;
-	margin-top: 2px;
-	font-size: 10pt;
-	width: 95%;
+#selected {
+	color: green;	
 }
 
 #drop1 {
@@ -83,12 +77,13 @@ body {
 	font-size: 10pt;
 	width: 95%;
 }
+/*			*/
 
 .clear {
-	clear: both;									/*Отменяем позиционирование (влияние float)*/
+	clear: both;									/*Cancelling float influence*/
 }
 
-/*Подвал*/
+/*Footer*/
 div#footer {
 	position: fixed;
 	left: 0; bottom: 0;

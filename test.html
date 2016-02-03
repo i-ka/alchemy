@@ -11,19 +11,27 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			
-			$(".select").mouseover(function(){
-				$(this).addClass("selected")});
+			$(".select").mouseover(function(){$(this).attr("id","selected")});
 		  
-			$(".select").mouseleave(function(){
-				$(this).removeClass("selected")});
-					
+			$(".select").mouseleave(function(){$(this).removeAttr("id","selected")});
+				
+			$(".select").draggable({
+				cursor: "move",
+				revert: true
+			});
+			 	 
+			$("#drop1").droppable({
+				drop:function(){
+					$(this).html($("#selected").html())
+				}
+			});
+				
+			$("#drop2").droppable({
+				drop:function(){$(this).html($("#selected").html())}
+			});
+		
 			$("#drop1").click(function(){$(this).html("Элемент")});
 			$("#drop2").click(function(){$(this).html("Элемент")});
-			
-			
-			$(".select").toggle(
-				function(){$(".selected").click(function(){$("#drop1").html($(".selected").html())})},
-				function(){$(".selected").click(function(){$("#drop2").html($(".selected").html())})});
 	
 		});		
    </script>
