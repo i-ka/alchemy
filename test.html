@@ -7,30 +7,54 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-	
 	<script type="text/javascript">
 		$(document).ready(function(){
-			
-			$(".select").mouseover(function(){$(this).attr("id","selected").css("cursor","move")}); 
-			$(".select").mouseleave(function(){$(this).removeAttr("id","selected")});
-				
-			$(".select").draggable({
-				revert: true,
-				revertDuration: 0
-			});
-			 	 
+		
+			$.getJSON("list.json",function(data) {
+				for(var i=0;i<data.elements.length;i++){$("#list").append("<div class=\"select\">"+data.elements[i].name);}
+					$(".select").draggable({
+						revert: true,
+						revertDuration: 0
+					});
+					
+					$(".select").mouseover(function(){$(this).attr("id","selected").css("cursor","move");}); 
+					$(".select").mouseleave(function(){$(this).removeAttr("id","selected");}); 
+				});
+				 
 			$("#drop1").droppable({
 				drop:function(){
-					$(this).html($("#selected").html())
+					$(this).html($("#selected").html());
+					$.getJSON("list.json",function(data) {
+						for(var i=0;i<data.elements.length;i++){
+							if ($("#drop1").html()==data.elements[i].name){
+								$("[name=rec1]").val(data.elements[i].id);
+							}
+						}
+					});
 				}
 			});
-				
+					
 			$("#drop2").droppable({
-				drop:function(){$(this).html($("#selected").html())}
+				drop:function(){
+					$(this).html($("#selected").html());
+					$.getJSON("list.json",function(data) {
+						for(var i=0;i<data.elements.length;i++){
+							if ($("#drop2").html()==data.elements[i].name){
+								$("[name=rec2]").val(data.elements[i].id);
+							}
+						}
+					});
+				}
 			});
 		
-			$("#drop1").click(function(){$(this).html("Элемент")});
-			$("#drop2").click(function(){$(this).html("Элемент")});
+			$("#drop1").click(function(){
+				$(this).html("Элемент 1");
+				$("[name=rec1]").val("empty");
+			});	
+			$("#drop2").click(function(){
+				$(this).html("Элемент 2");
+				$("[name=rec2]").val("empty");
+			});
 	
 		});		
    </script>
@@ -64,8 +88,10 @@
 									<label for="recipe">Рецепт:</label>
 								</td>
 								<td align=left>
-									<div id="drop1">Элемент</div>
-									<div id="drop2">Элемент</div>
+									<div id="drop1">Элемент 1</div>
+									<div id="drop2">Элемент 2</div>
+									<input type="hidden" name="rec1" value="empty">  <!--Element id goes here-->
+									<input type="hidden" name="rec2" value="empty">
 								</td>
 							</tr>
 							<tr>
@@ -94,10 +120,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td>
-								<div class="select">1</div>
-								<div class="select">2</div>
-								<div class="select">3</div>
+							<td id="list">
 							</td>
 						</tr>
 					</table>
