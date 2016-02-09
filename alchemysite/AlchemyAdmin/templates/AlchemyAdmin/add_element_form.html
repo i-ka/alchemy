@@ -1,15 +1,5 @@
-{%if status%}
-	<b>{{status}}</b>
-{%endif%}
 <form method="POST" action="{% url 'aladmin:create-element' %}">
 	{%csrf_token%}
-	<label for="name">Название</label>
-	<input type="text" name="name"/>
-	<label for="name">1ый элемент</label>
-	<input type="text" name="first_recipe_el"/>
-	<label for="name">2ой элемент</label>
-	<input type="text" name="second_recipe_el"/>
-	<label for="name">Описание</label>
-	<input type="text" name="discription"/>
-	<input type="submit" value="Add"/>
+	{{form}}
+	<input type="submit" value="Создать">
 </form>
