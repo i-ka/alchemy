@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 
 from AlchemyCommon.models import Element
+from .forms import ElementForm
 
 # Create your views here.
 
@@ -13,21 +14,24 @@ def index(request):
 def remove_element(request,el_id):
     Element.objects.get(pk=el_id).delete()
     return redirect('/alch-admin')
+
+def update_element(request,el_id):
+    if request.method == 'POST':
+        return redirect('/alch-admin')
     
 def create_element(request):
-    status = False
     if request.method == 'POST':
-        new_el = Element(
-            name = request.POST['name'],
-            first_recipe_el = int(request.POST['first_recipe_el']),
-            second_recipe_el = int(request.POST['second_recipe_el']),
-            discription = request.POST['discription'],
-            )
-        if new_el.check_conflict():
-            new_el.save()
-            status = 'Элемент добавлен'
-        else:
-            status = 'Ошибка:элемент из рецепта не существует!'
+        form = ElementForm(request.POST)
+        if form.is_valid():
+            new_element = Element(
+                name = form.cleaned_data['name'],
+                first_recipe_el = form.cleaned_data['first_recipe_el'],
+                second_recipe_el = form.cleaned_data['second_recipe_el'],
+                discription = form.cleaned_data['discription']
+                )
+            new_element.save()
+    else:
+        form = ElementForm()
     return render(request,'AlchemyAdmin/add_element_form.html',{
-        'status':status,
+        'form':form,
         })
