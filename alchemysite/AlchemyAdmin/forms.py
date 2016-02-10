@@ -1,11 +1,10 @@
 from django import forms
 from AlchemyCommon.models import Element
 
-class ElementForm(forms.Form):
-    name = forms.CharField(label = 'Название',max_length=50)
-    first_recipe_el = forms.IntegerField()
-    second_recipe_el = forms.IntegerField()
-    discription = forms.CharField(max_length=140)
+class ElementForm(forms.ModelForm):
+    class Meta:
+        model = Element
+        fields =['name','first_recipe_el','second_recipe_el','discription']
 
     def clean(self):
         cleaned_data = super(ElementForm,self).clean()
@@ -22,17 +21,30 @@ class ElementForm(forms.Form):
             except Element.DoesNotExist:
                 raise forms.ValidationError("Ошибка: элемент из рецепта не существует!")
             
+            if self.instance:
+                if cleaned_data.get('first_recipe_el')==self.instance.id or cleaned_data.get('second_recipe_el') == self.instance.id:
+                    raise forms.ValidationError("Ошибка: рецепт элемента не может содержать ссылку на себя!")
+                
             try:
                 Element.objects.get(first_recipe_el = cleaned_data.get('first_recipe_el'),second_recipe_el=cleaned_data.get('second_recipe_el'))
-                raise forms.ValidationError("Ошибка: элемент с таким рецептом уже существует!")
+                if self.instance:
+                    if self.instance.first_recipe_el != cleaned_data.get('first_recipe_el') or self.instance.second_recipe_el != cleaned_data.get('second_recipe_el'):
+                        raise forms.ValidationError("Ошибка: элемент с таким рецептом уже существует!")
+                else:
+                    raise forms.ValidationError("Ошибка: элемент с таким рецептом уже существует!")
             except Element.DoesNotExist:
                 pass
+            #except Element.MultipleObjectsReturned:
+            #    raise forms.ValidationError("Ошибка: элемент с таким рецептом уже существует!")
             
-        try:
-            el=Element.objects.get(name = cleaned_data.get('name'))
-            if el:
-                raise forms.ValidationError("Ошибка: элемент с таким именем уже существует!")
-        except Element.DoesNotExist:
-            pass 
+            try:
+                Element.objects.get(name = cleaned_data.get('name'))
+                if self.instance:
+                    if self.instance.name != cleaned_data.get('name'):
+                        raise forms.ValidationError("Ошибка: элемент с таким именем уже существует!")
+                else:
+                    raise forms.ValidationError("Ошибка: элемент с таким именем уже существует!")
+            except Element.DoesNotExist:
+                pass 
 
         return cleaned_data

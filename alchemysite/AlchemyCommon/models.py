@@ -15,3 +15,11 @@ class Element(models.Model):
 
     def __str__(self):
         return self.name
+
+    def check_on_delete(self):
+        conflict_elements = Element.objects.filter(models.Q(first_recipe_el=self.id)|models.Q(second_recipe_el=self.id))
+        if  len(conflict_elements)==0:
+            return False
+        else:
+            return conflict_elements
+        

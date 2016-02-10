@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 
 from AlchemyCommon.models import Element
 from .forms import ElementForm
-
+from django.db.models import Q
 # Create your views here.
 
 def index(request):
@@ -11,25 +11,44 @@ def index(request):
             'elements':all_elements,
         })
 
+def element_list(request, category_id):
+    pass
+
 def remove_element(request,el_id):
-    Element.objects.get(pk=el_id).delete()
-    return redirect('/alch-admin')
+    element_to_delete = Element.objects.get(pk=el_id)
+    conflict_elements = element_to_delete.check_on_delete()
+    print(conflict_elements)
+    if not conflict_elements:
+        element_to_delete.delete()
+        return redirect('/alch-admin')
+    error = True
+    return render(request,'AlchemyAdmin/index.html',{
+        'element_to_delete':element_to_delete,
+        'error':error,
+        'elements':conflict_elements
+        })
 
 def update_element(request,el_id):
+    updated_element = Element.objects.get(pk=el_id)
     if request.method == 'POST':
-        return redirect('/alch-admin')
+        form = ElementForm(request.POST,instance = updated_element)
+        if form.is_valid():
+            form.save()
+            return redirect('/alch-admin')
+    else:
+        form = ElementForm(instance=updated_element)
+    return render(request,'AlchemyAdmin/add_element_form.html',{
+        'updated_element':updated_element,
+        'form':form,
+        'update':True
+        })
     
 def create_element(request):
     if request.method == 'POST':
         form = ElementForm(request.POST)
         if form.is_valid():
-            new_element = Element(
-                name = form.cleaned_data['name'],
-                first_recipe_el = form.cleaned_data['first_recipe_el'],
-                second_recipe_el = form.cleaned_data['second_recipe_el'],
-                discription = form.cleaned_data['discription']
-                )
-            new_element.save()
+            form.save()
+            return redirect('/alch-admin')
     else:
         form = ElementForm()
     return render(request,'AlchemyAdmin/add_element_form.html',{
