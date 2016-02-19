@@ -1,1 +1,19 @@
-<h1 style="color:red;">Страница для не залогиненого пользователя</h1>
+{% extends "base.html" %}
+
+{% block title %}
+	Index
+{% endblock %}
+
+{% block header %}
+	<h2>Site</h2>
+{% endblock %}
+
+{% block center %}
+	<div class="block">
+		<div id="menu">	
+			<a href="#">Регистрация</a>
+			<a href="#">Вход</a>
+		</div>
+	<h3>User not logged in</h3>
+	</div>
+{% endblock %}
