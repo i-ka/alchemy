@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Element(models.Model):
@@ -23,3 +23,9 @@ class Element(models.Model):
         else:
             return conflict_elements
         
+class UserProfile(models.Model):
+    user = models.ForeignKey(User,unique=True,related_name='profile')
+    my_field = models.ManyToManyField(Element)
+
+    def __str__(self):
+        return self.user.username+"'s profile"
