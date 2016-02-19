@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'AlchemyAdmin',
     'AlchemyCommon',
+    'Game',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,6 +52,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 )
+
+AUTH_PROFILE_MODULE = 'AlchemyCommon.models.UserProfile'
 
 ROOT_URLCONF = 'alchemysite.urls'
 

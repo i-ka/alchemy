@@ -1,10 +1,12 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth.decorators import login_required
 
 from AlchemyCommon.models import Element
 from .forms import ElementForm
 from django.db.models import Q
 # Create your views here.
 
+@login_required()
 def index(request):
     all_elements = Element.objects.all()
     return render(request,'AlchemyAdmin/index.html',{

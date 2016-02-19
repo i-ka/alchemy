@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^alch-admin/',include('AlchemyAdmin.urls',namespace = 'aladmin')),
+    url(r'^',include('Game.urls',namespace = 'game')),
 ]
