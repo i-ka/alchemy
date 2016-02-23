@@ -34,8 +34,6 @@ class ElementForm(forms.ModelForm):
                     raise forms.ValidationError("Ошибка: элемент с таким рецептом уже существует!")
             except Element.DoesNotExist:
                 pass
-            #except Element.MultipleObjectsReturned:
-            #    raise forms.ValidationError("Ошибка: элемент с таким рецептом уже существует!")
             
             try:
                 Element.objects.get(name = cleaned_data.get('name'))

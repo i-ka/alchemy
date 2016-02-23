@@ -6,7 +6,7 @@ from .forms import ElementForm
 from django.db.models import Q
 # Create your views here.
 
-@login_required()
+@login_required(login_url='/login/')
 def index(request):
     all_elements = Element.objects.all()
     return render(request,'AlchemyAdmin/index.html',{

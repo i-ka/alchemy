@@ -24,8 +24,13 @@ class Element(models.Model):
             return conflict_elements
         
 class UserProfile(models.Model):
-    user = models.ForeignKey(User,unique=True,related_name='profile')
-    my_field = models.ManyToManyField(Element)
+    user = models.OneToOneField(User,unique=True,related_name='profile')
+    open_elements = models.ManyToManyField(Element)
 
     def __str__(self):
         return self.user.username+"'s profile"
+    
+def user_post_save(sender,instance,**kwargs):
+    (profile,new) = UserProfile.objects.get_or_create(user=instance)
+    
+models.signals.post_save.connect(user_post_save,sender=User)
