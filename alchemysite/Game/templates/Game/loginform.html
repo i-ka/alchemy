@@ -1,6 +1,14 @@
-<form method="post" action="{%url 'game:login' %}">
-	{% csrf_token %}
-	{{form.as_p}}
-	<input type="hidden" name="next" value="{{ next }}" />
-	<input type="submit" value="Login">
-</form>
+{% extends "base.html" %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block center %}
+	<div class="form">
+		<form method="post" action="{%url 'game:login' %}">
+			{% csrf_token %}
+			{{form.as_p}}
+			<input type="hidden" name="next" value="{{ next }}" />
+			<input type="submit" value="Login">
+		</form>
+	</div>
+{% endblock %}

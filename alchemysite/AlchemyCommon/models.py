@@ -6,7 +6,7 @@ class Element(models.Model):
     name = models.CharField(max_length=50,blank=False,default="Unknown element")
     first_recipe_el = models.IntegerField()
     second_recipe_el = models.IntegerField()
-    discription = models.TextField()
+    description = models.TextField()
     created_at = models.DateTimeField(auto_now=True)
 
     def is_essential_element(self):

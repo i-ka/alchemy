@@ -3,7 +3,7 @@ body {
 	font-family: Verdana, Helvetica, Arial;
 	font-size: 11pt;
 	color: #DCDCDC;
-	background-color: #111111;
+	background-color: #0A0A0A;
 	margin: 0;
 	padding: 0;
 	min-width: 800px;
@@ -13,56 +13,95 @@ body {
 #header {
 	border-bottom: 1px solid #323537;
 	width: 100%;
-	margin: 10px 0;
+	padding: 10px 0;
 	text-align: center;
-	font-size: 15pt;
+	font-size: 25pt;
 }
 
 /*Center block*/
 #center {
 	margin: 0 250px;
+	text-align:center;
 }
 
-/*Block parameters*/
-.block,.form {
-	background-image: url("../images/bgmenu.png");
+.block,.form,.tabs {
+	background-image: url("../images/bgmain.png");
 	background-color: #1C1C1C;
 	margin: 5px;
-	padding: 15px;
+	padding: 20px;
 	border: 1px dashed #323537;
+	vertical-align: top;
 }
 
-.form {
-	float: left;
-	text-align: center;
+.form,.tabs {
+	display: inline-block;
+}
+
+.form p {
+	text-align: right;
 }
 
 #menu {
+	display: inline;
 	text-align: center;
-	margin: 10px 0;
+	margin-bottom: 20px;
+	padding: 10px 0;
 }
 
-#menu a {
-	margin: 10px;
-	padding: 10px 5%;
+a, #menu a {
 	color: white;
-	border: 1px solid #323537;
-	border-radius: 5px;
 	text-decoration: none;
 }
 
-#selected, #menu a:hover {
-	box-shadow: 0 0 10px 2px #CCFF00;
+a:hover, #selected, #menu a:hover, .tabs_caption li:hover{
 	color: #CCFF00;
 }
 
+#menu a {
+	background-image: url("../images/bgmain.png");
+	background-color: #1E211E;
+	margin: 10px;
+	padding: 10px 5%;
+	border: 1px solid #323537;
+	border-radius: 5px;
+}
+
+#selected, #menu a:hover, .tabs_caption li:hover {
+	background-color: #000;
+	box-shadow: inset 0 0 5px 2px #CCFF00;
+}
+
 #drop1, #drop2, .select {
-	border-style:solid;
-	border-width:1px;
-	padding: 2px;
-	margin-top: 2px;
+	background-color: #1E211E;
+	border: 1px solid #323537;
+	margin: 5px;
+	padding: 5px;
 	font-size: 10pt;
-	width: 95%;
+	text-align: center;
+}
+
+/*Tabs*/
+.tabs_caption {
+	padding: 0;
+}
+.tabs_caption li {
+	display: inline;
+	padding: 5px 10px;
+	cursor: pointer;
+	border: 1px solid #323537;
+}
+
+.tabs_caption .active {
+	background-color: #000;
+	color: #F5F6CE;
+	box-shadow: inset 0 0 5px 1px #F5F6CE;
+}
+
+.tabs_content {
+	display: none;
+}
+.tabs_content.active {
+	display: block;
 }
 
 #footer {

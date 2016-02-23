@@ -1,10 +1,15 @@
 from django import forms
 from AlchemyCommon.models import Element
 
+	
 class ElementForm(forms.ModelForm):
     class Meta:
         model = Element
-        fields =['name','first_recipe_el','second_recipe_el','discription']
+        fields =['name','first_recipe_el','second_recipe_el','description']
+        widgets = {
+             'first_recipe_el': forms.HiddenInput(),
+			 'second_recipe_el': forms.HiddenInput()
+		}
 
     def clean(self):
         cleaned_data = super(ElementForm,self).clean()

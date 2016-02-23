@@ -1,12 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}
-	Index
-{% endblock %}
-
-{% block header %}
-	<h2>Site</h2>
-{% endblock %}
+{% block title %}Index{% endblock %}
 
 {% block center %}
 	{%if not error%}
@@ -26,7 +20,7 @@
 					{%else%}
 						<td>{{element.first_recipe_el}}+{{element.second_recipe_el}}</td>
 					{%endif%}
-					<td>{{element.discription}}</a></td>
+					<td>{{element.description}}</a></td>
 					<td><a href="{% url 'aladmin:del' element.id %}">Удалить</a></td>
 					<td><a href="{% url 'aladmin:update-element' element.id %}">Изменить</a></td>
 			</tr>

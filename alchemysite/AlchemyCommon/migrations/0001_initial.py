@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=50, default='Unknown element')),
                 ('first_recipe_el', models.IntegerField()),
                 ('second_recipe_el', models.IntegerField()),
-                ('discription', models.TextField()),
+                ('description', models.TextField()),
             ],
         ),
     ]
