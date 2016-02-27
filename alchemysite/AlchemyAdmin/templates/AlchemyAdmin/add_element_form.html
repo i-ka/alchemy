@@ -11,24 +11,27 @@
 {% endblock %}
 
 {% block center %}
-	{{form.name.errors}}
-	{{form.first_recipe_el.errors}}
-	{{form.second_recipe_el.errors}}
-	{{form.description.errors}}
 	<div class="form">
+	{{form.non_field_errors}}
 	{%if not update %}
 		<form method="POST" action="{% url 'aladmin:create-element' %}">
 			{%csrf_token%}
 			<p>
+				{{form.name.errors}}
 				<label for="name">Название элемента:</label>
 				{{form.name}}
 			</p>
+			<p>
+				<label for="category">Категория:</label>
+				{{form.category}}
+			</p>
 			<label for="recipe">Рецепт:</label>
 			<div id="drop1">Элемент 1</div>
-				<div id="drop2">Элемент 2</div>
+			<div id="drop2">Элемент 2</div>
 				<!--Element id goes here-->
 				{{form.first_recipe_el}}
 				{{form.second_recipe_el}}
+			{{form.description.errors}}
 			<label for="description">Описание:</label>
 			<br>
 			{{form.description}}
@@ -38,7 +41,24 @@
 	{%else%}
 		<form method="POST" action="{% url 'aladmin:update-element' updated_element.id%}">
 			{%csrf_token%}
-			{{form.as_p}}
+			<p>
+				<label for="name">Название элемента:</label>
+				{{form.name}}
+			</p>
+			<p>
+				<label for="category">Категория:</label>
+				{{form.category}}
+			</p>
+			<label for="recipe">Рецепт:</label>
+			<div id="drop1">Элемент 1</div>
+			<div id="drop2">Элемент 2</div>
+				<!--Element id goes here-->
+				{{form.first_recipe_el}}
+				{{form.second_recipe_el}}
+			<label for="description">Описание:</label>
+			<br>
+			{{form.description}}
+			<br>
 			<input type="submit" value="Изменить">
 		</form>
 	{%endif%}

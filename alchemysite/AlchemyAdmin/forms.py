@@ -3,12 +3,14 @@ from AlchemyCommon.models import Element
 
 	
 class ElementForm(forms.ModelForm):
+
+    
     class Meta:
         model = Element
-        fields =['name','first_recipe_el','second_recipe_el','description']
+        fields =['name','first_recipe_el','category','second_recipe_el','description']
         widgets = {
-             'first_recipe_el': forms.HiddenInput(),
-			 'second_recipe_el': forms.HiddenInput()
+            'first_recipe_el': forms.HiddenInput(),
+            'second_recipe_el': forms.HiddenInput()
 		}
 
     def clean(self):

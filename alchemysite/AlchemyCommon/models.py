@@ -2,11 +2,18 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
+class Category(models.Model):
+    name = models.CharField(max_length=50,blank=False,default="Unknown category")
+
+    def __str__(self):
+        return self.name
+
 class Element(models.Model):
     name = models.CharField(max_length=50,blank=False,default="Unknown element")
     first_recipe_el = models.IntegerField()
     second_recipe_el = models.IntegerField()
     description = models.TextField()
+    category = models.ForeignKey(Category)
     created_at = models.DateTimeField(auto_now=True)
 
     def is_essential_element(self):
@@ -22,6 +29,7 @@ class Element(models.Model):
             return False
         else:
             return conflict_elements
+    
         
 class UserProfile(models.Model):
     user = models.OneToOneField(User,unique=True,related_name='profile')

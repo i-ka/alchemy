@@ -1,7 +1,10 @@
 $(document).ready(function()
 {
-	$.getJSON("/static/list.json",function(data)
+	$.getJSON("http://127.0.0.1:8000/alch-admin/get-elements-by-category/1",function(data)
 	{
+		$("[name=first_recipe_el]").removeAttr("value");
+		$("[name=second_recipe_el]").removeAttr("value");
+
 		for(var i=0;i<data.elements.length;i++)
 		{
 			$("#list").append($("<div>").addClass("select").text(data.elements[i].name).attr("el_id",data.elements[i].id));

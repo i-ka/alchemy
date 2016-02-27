@@ -1,9 +1,10 @@
+from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-
-from AlchemyCommon.models import Element
+from AlchemyCommon.models import Element,Category
 from .forms import ElementForm
 from django.db.models import Q
+import json
 # Create your views here.
 
 @login_required(login_url='/login/')
@@ -14,7 +15,15 @@ def index(request):
         })
 
 def element_list(request, category_id):
-    pass
+    elements_dict={"elements":[]}
+    elements=Category.objects.get(pk=category_id).element_set.all()
+    for el in elements:
+        elements_dict['elements'].append({
+            'image':'qwer.jpg',
+            'name':el.name,
+            'id':el.id
+            })
+    return HttpResponse(json.dumps(elements_dict))
 
 def remove_element(request,el_id):
     element_to_delete = Element.objects.get(pk=el_id)
