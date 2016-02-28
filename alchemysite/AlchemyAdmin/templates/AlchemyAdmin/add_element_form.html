@@ -3,11 +3,15 @@
 {% block title %}Добавление элемента{% endblock %}
 	
 {% block javascript %}
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-	<script src="/static/addelement.js"></script>
-	<script src="/static/tabs.js"></script>
+	<script src="/static/js/obj_load_drag.js"></script>
+	<script src="/static/js/obj_drop.js"></script>
+	<script src="/static/js/tabs.js"></script>
+{% endblock %}
+
+{% block header%}
+	<div id="menu">	
+			<a href="{%url 'aladmin:index'%}">Список элементов</a>
+	</div>
 {% endblock %}
 
 {% block center %}
@@ -22,18 +26,22 @@
 				{{form.name}}
 			</p>
 			<p>
+				{{form.category.errors}}
 				<label for="category">Категория:</label>
 				{{form.category}}
+				<input type="checkbox" name="orig_check">Исходный элемент
 			</p>
-			<label for="recipe">Рецепт:</label>
-			<div id="drop1">Элемент 1</div>
-			<div id="drop2">Элемент 2</div>
+			<div id="recipe">
+				Рецепт:
+				<div id="drop1">Элемент 1</div>
+				<div id="drop2">Элемент 2</div>
 				<!--Element id goes here-->
 				{{form.first_recipe_el}}
 				{{form.second_recipe_el}}
-			{{form.description.errors}}
+			</div>
 			<label for="description">Описание:</label>
 			<br>
+			{{form.description.errors}}
 			{{form.description}}
 			<br>
 			<input type="submit" value="Создать">
@@ -42,21 +50,27 @@
 		<form method="POST" action="{% url 'aladmin:update-element' updated_element.id%}">
 			{%csrf_token%}
 			<p>
+				{{form.name.errors}}
 				<label for="name">Название элемента:</label>
 				{{form.name}}
 			</p>
 			<p>
+				{{form.category.errors}}
 				<label for="category">Категория:</label>
 				{{form.category}}
+				<input type="checkbox" name="orig_check">Исходный элемент
 			</p>
-			<label for="recipe">Рецепт:</label>
-			<div id="drop1">Элемент 1</div>
-			<div id="drop2">Элемент 2</div>
+			<div id="recipe">
+				Рецепт:
+				<div id="drop1">Элемент 1</div>
+				<div id="drop2">Элемент 2</div>
 				<!--Element id goes here-->
 				{{form.first_recipe_el}}
 				{{form.second_recipe_el}}
+			</div>
 			<label for="description">Описание:</label>
 			<br>
+			{{form.description.errors}}
 			{{form.description}}
 			<br>
 			<input type="submit" value="Изменить">
@@ -64,18 +78,6 @@
 	{%endif%}
 	</div>
 	<div class="tabs">
-		Элементы:
-		<ul class="tabs_caption">
-			<li>Категория</li>
-			<li>Категория</li>
-		</ul>	
-		
-		<div class="tabs_content">
-			<div id="list"></div>
-		</div>
-				
-		<div class="tabs_content">
-			2 категория
-		</div>
+		<ul class="tabs_caption"></ul>
 	</div>
 {% endblock %}

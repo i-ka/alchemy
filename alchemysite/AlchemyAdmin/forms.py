@@ -3,7 +3,6 @@ from AlchemyCommon.models import Element
 
 	
 class ElementForm(forms.ModelForm):
-
     
     class Meta:
         model = Element
