@@ -1,0 +1,75 @@
+body {
+	background-image: url("images/bgmain.png");
+	font-family: Verdana, Helvetica, Arial;
+	font-size: 11pt;
+	color: #DCDCDC;
+	/*background-color: #111111;*/
+	margin: 0;
+	padding: 0;
+	min-width: 800px;
+}
+
+/*Header*/
+#header {
+	border-bottom: 1px solid #323537;
+	width: 100%;
+	margin: 10px 0;
+	text-align: center;
+	font-size: 15pt;
+}
+
+/*Center block*/
+#center {
+	margin: 0 250px;
+}
+
+/*Block parameters*/
+.block,.form {
+	background-image: url("images/bgmenu.png");
+	background-color: #1C1C1C;
+	margin: 5px;
+	padding: 25px;
+	border: 1px dashed #323537;
+}
+
+.form {
+	float: left;
+	text-align: center;
+}
+
+#menu {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+#menu a {
+	margin: 10px;
+	padding: 10px 5%;
+	color: white;
+	border: 1px solid #323537;
+	border-radius: 5px;
+	text-decoration: none;
+}
+
+#selected, #menu a:hover {
+	box-shadow: 0 0 10px 2px #CCFF00;
+	color: #CCFF00;
+}
+
+#drop1, #drop2, .select {
+	border-style:solid;
+	border-width:1px;
+	padding: 2px;
+	margin-top: 2px;
+	font-size: 10pt;
+	width: 95%;
+}
+
+#footer {
+	position: fixed;
+	left: 0; bottom: 0;
+	width: 100%;
+	border-top: 1px solid #323537;
+	margin-top: 25px;
+	padding: 5px 0;
+}	

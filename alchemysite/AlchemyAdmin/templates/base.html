@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'AlchemyAdmin/main.css' %}" />
+	</head>
+<body>
+<!--Header -->
+	<div id="header">
+		{% block header %}{% endblock %}
+	</div>
+<!--Content-->
+	<div id="center">
+		{% block center %}{% endblock %}
+	</div>
+<!--Footer-->
+	<div id="footer">
+		{% block footer %}{% endblock %}
+	</div>
+</body>
+</html>
