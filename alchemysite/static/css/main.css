@@ -21,6 +21,10 @@ body {
 	font-size: 25pt;
 }
 
+.container {
+	margin: 0 40px;
+}
+
 #menu {
 	float: right;
 }
@@ -90,7 +94,7 @@ a:hover, #selected{
 }
 
 .card {
-	width: 150px;
+	width: 200px;
 	vertical-align: top;
 	word-break: break-word;
 }

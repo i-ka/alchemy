@@ -3,9 +3,7 @@
 {% block title %}Index{% endblock %}
 
 {% block header%}
-	<div id="menu">	
-		<a href="{%url 'aladmin:create-element'%}">Добавить элемент</a>
-	</div>
+	<a href="{%url 'aladmin:create-element'%}">Добавить элемент</a>
 {% endblock %}
 
 {% block center %}
@@ -17,23 +15,29 @@
 		<div class="card">		
 			Идентификатор:
 			{{element.id}}
+			<br>
 			Категория:
 			{{element.category}}
+			<br>
 			Название:
 			{{element.name}}
+			<br>
 			{% if element.is_essential_element %}
 			Исходный элемент
+			<br>
 			{%else%}
 			Рецепт:
 			{{element.first_recipe_el}}+{{element.second_recipe_el}}
+			<br>
 			{%endif%}
 			Описание:
 			{{element.description}}
+			<br>
 			<a href="{% url 'aladmin:del' element.id %}">Удалить</a>
 			<a href="{% url 'aladmin:update-element' element.id %}">Изменить</a>
 		</div>
 		{%empty%}
-			<p>No elements here!</p>
+			<p>Список элементов пуст</p>
 		{%endfor%}
 	</div>
 {% endblock %}

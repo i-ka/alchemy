@@ -38,6 +38,9 @@ $(document).ready(function()
 		$("#recipe").slideToggle("fast");
 		$("[name=first_recipe_el]").val("0");
 		$("[name=second_recipe_el]").val("0");
+		$("#drop1").text("Элемент 1");
+		$("#drop2").text("Элемент 2");
+		$("#drop1, #drop2").css("box-shadow", "");
 	});
 	
 });		

@@ -13,16 +13,18 @@
 <body>
 <!--Header -->
 	<div id="header">
-		<a href="http://localhost:8000/">Site</a>
-		<div id="menu">	
-			{% if user.is_authenticated %}
-			<a href="http://localhost:8000/logout">Выход</a>
-			{% else %}
-			<a href="http://localhost:8000/login">Вход</a>
-			<a href="http://localhost:8000/registration">Регистрация</a>
-			{% endif %}
+		<div class="container">
+			<a href="http://localhost:8000/">Site</a>
+			<div id="menu">	
+				{% block header %}{% endblock %}
+				{% if user.is_authenticated %}
+				<a href="http://localhost:8000/logout">Выход</a>
+				{% else %}
+				<a href="http://localhost:8000/login">Вход</a>
+				<a href="http://localhost:8000/registration">Регистрация</a>
+				{% endif %}
+			</div>
 		</div>
-		{% block header %}{% endblock %}
 	</div>
 <!--Content-->
 	<div id="center">
