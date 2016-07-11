@@ -14,6 +14,16 @@ def index(request):
             'elements': all_elements,
         })
 
+def get_catigories(request):
+    categories_dict = {"catigories": []}
+    categories = Category.objects.all()
+    for category in categories:
+        categories_dict["catigories"].append({
+            "id": category.id,
+            "name": category.name
+            })
+    return HttpResponse(json.dumps(categories_dict))
+
 
 def element_list(request, category_id):
     elements_dict = {"elements": []}
