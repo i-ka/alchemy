@@ -1,4 +1,5 @@
 from django import forms
+from django.db.models import Q
 from AlchemyCommon.models import Element
 
 
@@ -18,41 +19,32 @@ class ElementForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super(ElementForm, self).clean()
-        name = cleaned_data.get('name')
         f_rec_el = cleaned_data.get('first_recipe_el')
         s_rec_el = cleaned_data.get('second_recipe_el')
         if f_rec_el > s_rec_el:
             cleaned_data['first_recipe_el'] = s_rec_el
             cleaned_data['second_recipe_el'] = f_rec_el
-        if f_rec_el != 0 and s_rec_el != 0:
-            try:
-                Element.objects.get(pk=cleaned_data.get('first_recipe_el'))
-                Element.objects.get(pk=cleaned_data.get('second_recipe_el'))
-            except Element.DoesNotExist:
-                raise forms.ValidationError("Ошибка: элемент из рецепта не существует!")
+            f_rec_el, s_rec_el = s_rec_el, f_rec_el
 
-            if self.instance:
-                if cleaned_data.get('first_recipe_el') == self.instance.id or cleaned_data.get('second_recipe_el') == self.instance.id:
-                    raise forms.ValidationError("Ошибка: рецепт элемента не может содержать ссылку на себя!")
+        if f_rec_el == 0 or s_rec_el == 0:
+            if f_rec_el != s_rec_el:
+                raise forms.ValidationError("Ошибка: Должно быть два элемента!")
+        else:
+            if (not Element.objects.filter(Q(pk=f_rec_el) | Q(pk=s_rec_el)).exists()):
+                raise forms.ValidationError("Ошибка: Элемент из рецепта не существует!")
 
-            try:
-                Element.objects.get(first_recipe_el=cleaned_data.get('first_recipe_el'), second_recipe_el=cleaned_data.get('second_recipe_el'))
+            isRecipeDuplicate = Element.objects.filter(first_recipe_el=f_rec_el, second_recipe_el=s_rec_el).exists()
+            if isRecipeDuplicate:
                 if self.instance:
-                    if self.instance.first_recipe_el != cleaned_data.get('first_recipe_el') or self.instance.second_recipe_el != cleaned_data.get('second_recipe_el'):
-                        raise forms.ValidationError("Ошибка: элемент с таким рецептом уже существует!")
+                    if (self.instance.first_recipe_el != f_rec_el and self.instance.second_recipe_el != s_rec_el):
+                        raise forms.ValidationError("Ошибка: Элемент с таким рецептом уже существует")
                 else:
-                    raise forms.ValidationError("Ошибка: элемент с таким рецептом уже существует!")
-            except Element.DoesNotExist:
-                pass
-
-            try:
-                Element.objects.get(name=cleaned_data.get('name'))
-                if self.instance:
-                    if self.instance.name != cleaned_data.get('name'):
-                        raise forms.ValidationError("Ошибка: элемент с таким именем уже существует!")
-                else:
-                    raise forms.ValidationError("Ошибка: элемент с таким именем уже существует!")
-            except Element.DoesNotExist:
-                pass
+                    forms.ValidationError("Ошибка: Элемент с таким рецептом уже существует")
+            if (self.instance):
+                query = Element.objects.filter(Q(pk=f_rec_el) | Q(pk=s_rec_el)).filter(Q(first_recipe_el=self.instance.id) | Q(second_recipe_el=self.instance.id))
+                if (query.exists()):
+                    raise forms.ValidationError("cycle dependence!")
+                if (s_rec_el == self.instance.id and f_rec_el == self.instance.id):
+                    raise forms.ValidationError("Ошибка: Элементь не может сожержать ссылку на себя")
 
         return cleaned_data
