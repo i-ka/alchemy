@@ -1,18 +1,18 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
 from AlchemyCommon.models import Element, Category
 from .forms import ElementForm
 # Create your views here.
 
 
-@login_required(login_url='/login/')
+@permission_required('AlchemyCommon.can_change_element', login_url='/login/', raise_exception=True)
 def index(request):
     all_elements = Element.objects.all()
     return render(request, 'AlchemyAdmin/index.html', {
             'elements': all_elements,
         })
 
-
+@permission_required('AlchemyCommon.can_delete_element', login_url='/login/', raise_exception=True)
 def remove_element(request, el_id):
     element_to_delete = Element.objects.get(pk=el_id)
     conflict_elements = element_to_delete.check_on_delete()
@@ -27,7 +27,7 @@ def remove_element(request, el_id):
         'elements': conflict_elements
         })
 
-
+@permission_required('AlchemyCommon.can_change_element', login_url='/login/', raise_exception=True)
 def update_element(request, el_id):
     updated_element = Element.objects.get(pk=el_id)
     if request.method == 'POST':
@@ -43,7 +43,7 @@ def update_element(request, el_id):
         'update': True
         })
 
-
+@permission_required('AlchemyCommon.can_add_element', login_url='/login/', raise_exception=True)
 def create_element(request):
     if request.method == 'POST':
         form = ElementForm(request.POST)
