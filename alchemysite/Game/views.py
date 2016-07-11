@@ -38,11 +38,11 @@ def registration(request):
     return render(request, 'Game/regform.html', {'form': form})
 
 
-def get_catigories(request):
-    categories_dict = {"catigories": []}
+def get_categories(request):
+    categories_dict = {"categories": []}
     categories = Category.objects.all()
     for category in categories:
-        categories_dict["catigories"].append({
+        categories_dict["categories"].append({
             "id": category.id,
             "name": category.name
             })

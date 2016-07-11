@@ -45,6 +45,6 @@ class ElementForm(forms.ModelForm):
                 if (query.exists()):
                     raise forms.ValidationError("cycle dependence!")
                 if (s_rec_el == self.instance.id and f_rec_el == self.instance.id):
-                    raise forms.ValidationError("Ошибка: Элементь не может сожержать ссылку на себя")
+                    raise forms.ValidationError("Ошибка: Элемент не может содержать ссылку на себя")
 
         return cleaned_data
