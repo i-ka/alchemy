@@ -17,7 +17,8 @@ class Category(models.Model):
 class Element(models.Model):
     name = models.CharField(max_length=50,
                             blank=False,
-                            default="Unknown element")
+                            default="Unknown element",
+                            unique=True)
     first_recipe_el = models.IntegerField()
     second_recipe_el = models.IntegerField()
     description = models.TextField()
