@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .forms import RegisterForm
-from AlchemyCommon.models import Element
+from AlchemyCommon.models import Element, Category
 from django.contrib.auth import authenticate, login
+import json
 # Create your views here.
 
 
@@ -34,3 +36,26 @@ def registration(request):
     else:
         form = RegisterForm()
     return render(request, 'Game/regform.html', {'form': form})
+
+
+def get_catigories(request):
+    categories_dict = {"catigories": []}
+    categories = Category.objects.all()
+    for category in categories:
+        categories_dict["catigories"].append({
+            "id": category.id,
+            "name": category.name
+            })
+    return HttpResponse(json.dumps(categories_dict))
+
+
+def element_list(request, category_id):
+    elements_dict = {"elements": []}
+    elements = Category.objects.get(pk=category_id).element_set.all()
+    for el in elements:
+        elements_dict['elements'].append({
+            'image': 'qwer.jpg',
+            'name': el.name,
+            'id': el.id
+            })
+    return HttpResponse(json.dumps(elements_dict))

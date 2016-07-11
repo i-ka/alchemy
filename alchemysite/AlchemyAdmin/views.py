@@ -1,9 +1,7 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from AlchemyCommon.models import Element, Category
 from .forms import ElementForm
-import json
 # Create your views here.
 
 
@@ -13,28 +11,6 @@ def index(request):
     return render(request, 'AlchemyAdmin/index.html', {
             'elements': all_elements,
         })
-
-def get_catigories(request):
-    categories_dict = {"catigories": []}
-    categories = Category.objects.all()
-    for category in categories:
-        categories_dict["catigories"].append({
-            "id": category.id,
-            "name": category.name
-            })
-    return HttpResponse(json.dumps(categories_dict))
-
-
-def element_list(request, category_id):
-    elements_dict = {"elements": []}
-    elements = Category.objects.get(pk=category_id).element_set.all()
-    for el in elements:
-        elements_dict['elements'].append({
-            'image': 'qwer.jpg',
-            'name': el.name,
-            'id': el.id
-            })
-    return HttpResponse(json.dumps(elements_dict))
 
 
 def remove_element(request, el_id):
