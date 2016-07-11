@@ -1,11 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %}Добавление элемента{% endblock %}
+{% block title %}
+	{%if not update %}
+	Добавление элемента
+	{%else%}
+	Изменение элемента
+	{%endif%}
+{% endblock %}
 	
 {% block javascript %}
+	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/obj_load_drag.js"></script>
 	<script src="/static/js/obj_drop.js"></script>
-	<script src="/static/js/tabs.js"></script>
 {% endblock %}
 
 {% block header%}
@@ -13,69 +19,87 @@
 {% endblock %}
 
 {% block center %}
-	<div class="form">
 	{{form.non_field_errors}}
 	{%if not update %}
-		<form method="POST" action="{% url 'aladmin:create-element' %}">
+	<div class="col-xs-8">
+		<form class="form-signin" role="form" method="POST" action="{% url 'aladmin:create-element' %}">
 			{%csrf_token%}
-			<p>
+			<div class="form-group">
 				{{form.name.errors}}
 				<label for="name">Название элемента:</label>
 				{{form.name}}
-			</p>
-			<p>
+			</div>
+			
+			<div class="form-group">
 				{{form.category.errors}}
 				<label for="category">Категория:</label>
 				{{form.category}}
-				<input type="checkbox" name="orig_check">Исходный элемент
-			</p>
-			<div id="recipe">
-				Рецепт:
-				<div id="drop1">Элемент 1</div>
-				<div id="drop2">Элемент 2</div>
-				<!--Element id goes here-->
-				{{form.first_recipe_el}}
-				{{form.second_recipe_el}}
 			</div>
-			<label for="description">Описание:</label>
-			<br>
-			{{form.description.errors}}
-			{{form.description}}
-			<br>
-			<input type="submit" value="Создать">
-		</form>
-	{%else%}
-		<form method="POST" action="{% url 'aladmin:update-element' updated_element.id%}">
-			{%csrf_token%}
-			<p>
-				{{form.name.errors}}
-				<label for="name">Название элемента:</label>
-				{{form.name}}
-			</p>
-			<p>
-				{{form.category.errors}}
-				<label for="category">Категория:</label>
-				{{form.category}}
-				<input type="checkbox" name="orig_check">Исходный элемент
-			</p>
-			<div id="recipe">
-				Рецепт:
-				<div id="drop1">Элемент 1</div>
-				<div id="drop2">Элемент 2</div>
-				<!--Element id goes here-->
-				{{form.first_recipe_el}}
-				{{form.second_recipe_el}}
+			<div class="form-group">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" data-toggle="collapse" data-target="#recipe" name="orig_check">Исходный элемент
+					</label>
+				</div>
+				<div id="recipe" class="btn-group-vertical collapse in">
+					Рецепт:
+					<div class="btn btn-default" id="drop1">Элемент 1</div>
+					<div class="btn btn-default" id="drop2">Элемент 2</div>
+					<!--Element id goes here-->
+					{{form.first_recipe_el}}
+					{{form.second_recipe_el}}
+				</div>
 			</div>
-			<label for="description">Описание:</label>
-			<br>
-			{{form.description.errors}}
-			{{form.description}}
-			<br>
-			<input type="submit" value="Изменить">
+			
+			<div class="form-group">
+				{{form.description.errors}}
+				<label for="description">Описание:</label>
+				{{form.description}}
+			</div>
+			<button type="submit" class="btn btn-block btn-success">Создать</button>
 		</form>
-	{%endif%}
 	</div>
-	<div class="tabs">
-		<ul class="tabs_caption"></ul>
+	{%else%}
+	<div class="col-xs-8">
+		<form class="form-signin" role="form" method="POST" action="{% url 'aladmin:update-element' updated_element.id%}">
+			{%csrf_token%}	
+			<div class="form-group">
+				{{form.name.errors}}
+				<label for="name">Название элемента:</label>
+				{{form.name}}
+			</div>
+			<div class="form-group">
+				{{form.category.errors}}
+				<label for="category">Категория:</label>
+				{{form.category}}
+			</div>
+			<div class="form-group">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" data-toggle="collapse" data-target="#recipe" name="orig_check">Исходный элемент
+					</label>
+				</div>
+				<div id="recipe" class="btn-group-vertical collapse in">
+					Рецепт:
+					<button class="btn btn-default" id="drop1">Элемент 1</button>
+					<button class="btn btn-default" id="drop2">Элемент 2</button>
+					<!--Element id goes here-->
+					{{form.first_recipe_el}}
+					{{form.second_recipe_el}}
+				</div>
+			</div>
+			
+			<div class="form-group">
+				{{form.description.errors}}
+				<label for="description">Описание:</label>
+				{{form.description}}
+			</div>
+			<button type="submit" class="btn btn-block btn-success">Изменить</button>				
+		</form>
+	</div>
+	{%endif%}
+	<div class="col-xs-4 elements">
+		<ul class="nav nav-tabs"></ul>
+		<div class="tab-content"></div>
 	</div>
 {% endblock %}

@@ -7,37 +7,42 @@
 {% endblock %}
 
 {% block center %}
-	<div class="block">
 	{%if error%}
-	<p>Чтобы удалить элемент {{element_to_delete.name}} удалите или измените следущие элементы:</p>
-	{%endif%}
-		{% for element in elements %}
-		<div class="card">		
-			Идентификатор:
-			{{element.id}}
-			<br>
-			Категория:
-			{{element.category}}
-			<br>
-			Название:
-			{{element.name}}
-			<br>
-			{% if element.is_essential_element %}
-			Исходный элемент
-			<br>
-			{%else%}
-			Рецепт:
-			{{element.first_recipe_el}}+{{element.second_recipe_el}}
-			<br>
-			{%endif%}
-			Описание:
-			{{element.description}}
-			<br>
-			<a href="{% url 'aladmin:del' element.id %}">Удалить</a>
-			<a href="{% url 'aladmin:update-element' element.id %}">Изменить</a>
-		</div>
-		{%empty%}
-			<p>Список элементов пуст</p>
-		{%endfor%}
-	</div>
+		<p>Чтобы удалить элемент {{element_to_delete.name}} удалите или измените следущие элементы:</p>
+	{%endif%}	
+		<table class="table table-condensed table-hover">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Категория</th>
+					<th>Название</th>
+					<th>Рецепт</th>
+					<th>Описание</th>
+					<th>Действие</th>
+				 </tr>
+			</thead>
+		 
+			<tbody>	
+			{% for element in elements %}
+				<tr>	
+					<td>{{element.id}}</td>
+					<td>{{element.category}}</td>
+					<td>{{element.name}}</td>
+					<td>
+						{% if element.is_essential_element %}
+						Исходный элемент
+						{%else%}
+						{{element.first_recipe_el}}+{{element.second_recipe_el}}
+						{%endif%}
+					</td>
+					<td>{{element.description}}</td>
+					<td>
+						<a href="{% url 'aladmin:update-element' element.id %}" class="btn btn-sm btn-warning">Изменить</a>
+						<a href="{% url 'aladmin:del' element.id %}" class="btn btn-sm btn-danger">Удалить</a>
+					</td>
+				</tr>
+			{%empty%}Список элементов пуст
+			{%endfor%}
+			</tbody>
+		</table>
 {% endblock %}

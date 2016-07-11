@@ -2,13 +2,18 @@
 
 {% block title %}Авторизация{% endblock %}
 
-{% block center %}
-	<div class="form">
-		<form method="post" action="{%url 'game:login' %}">
-			{% csrf_token %}
-			{{form.as_p}}
-			<input type="hidden" name="next" value="{{ next }}" />
-			<input type="submit" value="Login">
-		</form>
-	</div>
+{% block center %} 
+	<form class="form-signin" role="form" method="post" action="{%url 'game:login' %}">
+		{% csrf_token %}
+		<h2 class="form-signin-heading">Please login</h2>
+		{{form.as_p}}
+		
+		<!--
+		<input id="id_username" type="username" class="form-control" placeholder="Username" required autofocus>
+        <input id="id_password" type="password" class="form-control" placeholder="Password" required>
+		-->
+		
+		<input type="hidden" name="next" value="{{ next }}" />
+		<button class="btn btn-primary btn-block" type="submit">Вход</button>
+	</form>
 {% endblock %}
