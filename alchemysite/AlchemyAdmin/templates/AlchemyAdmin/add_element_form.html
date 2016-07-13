@@ -20,9 +20,12 @@
 
 {% block center %}
 	{{form.non_field_errors}}
-	{%if not update %}
 	<div class="col-xs-8">
-		<form class="form-signin" role="form" method="POST" action="{% url 'aladmin:create-element' %}">
+		{%if not update %}
+			<form class="form-signin" role="form" method="POST" action="{% url 'aladmin:create-element' %}">
+		{%else%}
+			<form class="form-signin" role="form" method="POST" action="{% url 'aladmin:update-element' updated_element.id%}">
+		{%endif%}
 			{%csrf_token%}
 			<div class="form-group">
 				{{form.name.errors}}
@@ -56,48 +59,14 @@
 				<label for="description">Описание:</label>
 				{{form.description}}
 			</div>
-			<button type="submit" class="btn btn-block btn-success">Создать</button>
+			{%if not update %}
+				<button type="submit" class="btn btn-block btn-success">Создать</button>
+			{%else%}
+				<button type="submit" class="btn btn-block btn-success">Изменить</button>
+			{%endif%}
 		</form>
 	</div>
-	{%else%}
-	<div class="col-xs-8">
-		<form class="form-signin" role="form" method="POST" action="{% url 'aladmin:update-element' updated_element.id%}">
-			{%csrf_token%}	
-			<div class="form-group">
-				{{form.name.errors}}
-				<label for="name">Название элемента:</label>
-				{{form.name}}
-			</div>
-			<div class="form-group">
-				{{form.category.errors}}
-				<label for="category">Категория:</label>
-				{{form.category}}
-			</div>
-			<div class="form-group">
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" data-toggle="collapse" data-target="#recipe" name="orig_check">Исходный элемент
-					</label>
-				</div>
-				<div id="recipe" class="btn-group-vertical collapse in">
-					Рецепт:
-					<button class="btn btn-default" id="drop1">Элемент 1</button>
-					<button class="btn btn-default" id="drop2">Элемент 2</button>
-					<!--Element id goes here-->
-					{{form.first_recipe_el}}
-					{{form.second_recipe_el}}
-				</div>
-			</div>
-			
-			<div class="form-group">
-				{{form.description.errors}}
-				<label for="description">Описание:</label>
-				{{form.description}}
-			</div>
-			<button type="submit" class="btn btn-block btn-success">Изменить</button>				
-		</form>
-	</div>
-	{%endif%}
+
 	<div class="col-xs-4 elements">
 		<ul class="nav nav-tabs"></ul>
 		<div class="tab-content"></div>
