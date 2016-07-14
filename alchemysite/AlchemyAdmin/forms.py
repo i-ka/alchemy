@@ -13,8 +13,11 @@ class ElementForm(forms.ModelForm):
                   'second_recipe_el',
                   'description']
         widgets = {
+            'name': forms.TextInput(attrs={'class':'form-control'}),
             'first_recipe_el': forms.HiddenInput(),
-            'second_recipe_el': forms.HiddenInput()
+            'second_recipe_el': forms.HiddenInput(),
+            'category': forms.Select(attrs={'class':'form-control'}),
+            'description': forms.Textarea(attrs={'class':'form-control'})
         }
 
     def clean(self):
