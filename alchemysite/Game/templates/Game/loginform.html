@@ -6,13 +6,30 @@
 	<form class="form-signin" role="form" method="post" action="{%url 'game:login' %}">
 		{% csrf_token %}
 		<h2 class="form-signin-heading">Please login</h2>
-		{{form.as_p}}
-		
-		<!--
-		<input id="id_username" type="username" class="form-control" placeholder="Username" required autofocus>
-        <input id="id_password" type="password" class="form-control" placeholder="Password" required>
-		-->
-		
+
+		{% if form.non_field_errors %}
+			<div class="alert alert-danger" role="alert"> {{form.non_field_errors.as_text}} </div>
+		{% endif %}
+
+		{% if form.username.errors%}
+			<div class="form-group has-error">
+			<strong class="help-block">{{form.username.errors.as_text}}</strong>
+		{% else %}
+			<div class="form-group">
+		{% endif %}
+
+			<input id="id_username" name="username" type="username" class="form-control" placeholder="Username" required autofocus>
+		</div>
+
+		{% if form.password.errors %}
+			<div class="form-group has-error">
+			<strong class="help-block">{{form.password.errors.as_text}}</strong>
+		{% else %}
+			<div class="form-group">
+		{% endif %}
+
+        	<input id="id_password" name="password" type="password" class="form-control" placeholder="Password" required>
+		</div>
 		<input type="hidden" name="next" value="{{ next }}" />
 		<button class="btn btn-primary btn-block" type="submit">Вход</button>
 	</form>
