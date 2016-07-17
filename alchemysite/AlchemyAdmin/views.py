@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import permission_required
-from AlchemyCommon.models import Element, Category
+from AlchemyCommon.models import Element, Category, User
 from .forms import ElementForm
 # Create your views here.
 
@@ -49,6 +49,9 @@ def create_element(request):
         form = ElementForm(request.POST)
         if form.is_valid():
             form.save()
+            if form.instance.is_essential_element():
+                for user in User.objects.all():
+                    user.profile.open_elements.add(form.instance)
             return redirect('/alch-admin')
     else:
         form = ElementForm()
