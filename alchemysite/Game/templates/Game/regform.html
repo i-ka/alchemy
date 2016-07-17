@@ -6,15 +6,52 @@
 	<form class="form-signin" role="form" method="post" action="{%url 'game:registration' %}">
 		{% csrf_token %}
 		<h2 class="form-signin-heading">Please sign up</h2>
-		{{form.as_p}}
+
+		{% if form.non_field_errors %}
+			<div class="alert alert-danger" role="alert"> {{form.non_field_errors.as_text}} </div>
+		{% endif %}
+
+		{% if form.username.errors%}
+			<div class="form-group has-error">
+			<strong class="help-block">{{form.username.errors.as_text}}</strong>
+		{% else %}
+			<div class="form-group">
+		{% endif %}
+
+			<input id="id_username" name="username" type="username" class="form-control" placeholder="Username" required autofocus>
+		</div>
+
+		{% if form.email.errors %}
+			<div class="form-group has-error">
+			<strong class="help-block">{{form.email.errors.as_text}}</strong>
+		{% else %}
+			<div class="form-group">
+		{% endif %}
 		
-		<!--
-		<input id="id_username" type="username" class="form-control" placeholder="Username" required autofocus>
-        <input id="id_email" type="email" class="form-control" placeholder="Email" required>
-		<input id="id_pass1" type="pass1" class="form-control" placeholder="Пароль" required autofocus>
-        <input id="id_pass2" type="pass2" class="form-control" placeholder="Пароль еще раз" required>
-		-->
+		<input id="id_email" name="email" type="email" class="form-control" placeholder="Email" required>
+		</div>
+
+		{% if form.pass1.errors %}
+			<div class="form-group has-error">
+			<strong class="help-block">{{form.pass1.errors.as_text}}</strong>
+		{% else %}
+			<div class="form-group">
+		{% endif %}
+
+			<input id="id_pass1" name="pass1" type="pass1" class="form-control" placeholder="Password" required>
+		</div>
+
+		{% if form.pass2.errors %}
+			<div class="form-group has-error">
+			<strong class="help-block">{{form.pass2.errors.as_text}}</strong>
+		{% else %}
+			<div class="form-group">
+		{% endif %}
+
+			<input id="id_pass2" name="pass2" type="pass2" class="form-control" placeholder="Password again" required>
+		</div>
 		
+		<input type="hidden" name="next" value="{{ next }}" />
 		<button class="btn btn-primary btn-block" type="submit">Регистрация</button>
 	</form>
 {% endblock %}
