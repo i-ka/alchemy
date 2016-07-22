@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  $("[name=first_recipe_el], [name=second_recipe_el]").removeAttr("value");
   $("#drop1").droppable({
     drop: function() {
       $(this).text($("#selected").text());
@@ -13,7 +14,6 @@ $(document).ready(function() {
       $(this).removeClass("btn-default").addClass("btn-info");
     }
   });
-
   $("#drop1").click(function() {
     $(this).text("Элемент 1");
     $("[name=first_recipe_el]").removeAttr("value");
