@@ -16,21 +16,21 @@ def index(request):
 
 
 def registration(request):
+    if request.user.is_authenticated():
+    	return redirect('/')
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = User(
                 username=form.cleaned_data['username'],
-                email=form.cleaned_data['email'],
-                )
+                email=form.cleaned_data['email'])
             user.set_password(form.cleaned_data['pass1'])
             user.save()
             for el in Element.objects.filter(first_recipe_el=0).filter(second_recipe_el=0):
                 user.profile.open_elements.add(el)
             user = authenticate(
                 username=form.cleaned_data['username'],
-                password=form.cleaned_data['pass1']
-                )
+                password=form.cleaned_data['pass1'])
             login(request, user)
             return redirect('/')
     else:
