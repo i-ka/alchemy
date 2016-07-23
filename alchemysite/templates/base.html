@@ -23,16 +23,16 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="http://localhost:8000/">Alchemy</a>
+				<a class="navbar-brand" href="{% url 'game:index' %}">Alchemy</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li>{% block header %}{% endblock %}</li>
 					{% if user.is_authenticated %}
-					<li><a href="http://localhost:8000/logout">Выход</a></li>
+					<li><a href="{% url 'game:logout' %}">Выход</a></li>
 					{% else %}
-					<li><a href="http://localhost:8000/login">Вход</a></li>
-					<li><a href="http://localhost:8000/registration">Регистрация</a></li>
+					<li><a href="{% url 'game:login' %}">Вход</a></li>
+					<li><a href="{% url 'game:registration' %}">Регистрация</a></li>
 					{% endif %}
 				</ul>
 			</div><!--/.nav-collapse -->
