@@ -31,26 +31,18 @@
 		<input id="id_email" name="email" type="email" class="form-control" placeholder="Email" required>
 		</div>
 
-		{% if form.pass1.errors %}
+		{% if form.pass1.errors or form.pass2.errors %}
 			<div class="form-group has-error">
 			<strong class="help-block">{{form.pass1.errors.as_text}}</strong>
-		{% else %}
-			<div class="form-group">
-		{% endif %}
-
-			<input id="id_pass1" name="pass1" type="pass1" class="form-control" placeholder="Password" required>
-		</div>
-
-		{% if form.pass2.errors %}
-			<div class="form-group has-error">
 			<strong class="help-block">{{form.pass2.errors.as_text}}</strong>
 		{% else %}
 			<div class="form-group">
 		{% endif %}
 
-			<input id="id_pass2" name="pass2" type="pass2" class="form-control" placeholder="Password again" required>
+			<input id="id_pass1" name="pass1" type="password" class="form-control" placeholder="Password" required>
+			<input id="id_pass2" name="pass2" type="password" class="form-control" placeholder="Password again" required>
 		</div>
-		
+
 		<input type="hidden" name="next" value="{{ next }}" />
 		<button class="btn btn-primary btn-block" type="submit">Регистрация</button>
 	</form>
