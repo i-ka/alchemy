@@ -2,15 +2,15 @@ $(document).ready(function() {
   $("[name=first_recipe_el], [name=second_recipe_el]").removeAttr("value");
   $("#drop1").droppable({
     drop: function() {
-      $(this).text($("#selected").text());
-      $("[name=first_recipe_el]").val($("#selected").attr("el_id"));
+      $(this).text($(".ui-draggable-dragging").text());
+      $("[name=first_recipe_el]").val($(".ui-draggable-dragging").attr("el_id"));
       $(this).removeClass("btn-default").addClass("btn-info");
     }
   });
   $("#drop2").droppable({
     drop: function() {
-      $(this).text($("#selected").text());
-      $("[name=second_recipe_el]").val($("#selected").attr("el_id"));
+      $(this).text($(".ui-draggable-dragging").text());
+      $("[name=second_recipe_el]").val($(".ui-draggable-dragging").attr("el_id"));
       $(this).removeClass("btn-default").addClass("btn-info");
     }
   });

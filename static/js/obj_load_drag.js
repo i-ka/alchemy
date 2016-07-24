@@ -2,13 +2,7 @@ function elementLoad(categoryId) {
   $.getJSON( "/get-elements-by-category/" + categoryId,function(elementData) {
     for (var j = 0; j < elementData.elements.length; j++) {
       $("#" + categoryId).append($("<a>").addClass("btn btn-default select").text(elementData.elements[j].name).attr("el_id", elementData.elements[j].id));
-
-      $(".select").draggable ({ revert: true, revertDuration: 0 });
-      $(".select").mouseover(function() {
-        $(this).attr("id", "selected").css("cursor", "move");
-      }).mouseleave(function() {
-        $(this).removeAttr("id","selected");
-      });
+      $(".select").draggable({ helper: "clone" });
     }
   });
 }
