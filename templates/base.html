@@ -27,7 +27,7 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li>{% block header %}{% endblock %}</li>
+					{% block header %}{% endblock %}
 					{% if user.is_authenticated %}
 					<li><a href="{% url 'game:logout' %}">Выход</a></li>
 					{% else %}
@@ -45,8 +45,8 @@
 		</div>
 	</div>
 <!--Footer-->
-	<div id="footer">
+	<footer>
 		{% block footer %}{% endblock %}
-	</div>
+	</footer>
 </body>
 </html>

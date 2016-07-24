@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Index{% endblock %}
+{% block title %}Список элементов{% endblock %}
 
 {% block header%}
-	<a href="{%url 'aladmin:create-element'%}">Добавить элемент</a>
+	<li><a href="{% url 'aladmin:create-element' %}">Добавить элемент</a></li>
 {% endblock %}
 
 {% block center %}
