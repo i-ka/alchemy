@@ -43,16 +43,18 @@
 						<input type="checkbox" data-toggle="collapse" data-target="#recipe" name="orig_check">Исходный элемент
 					</label>
 				</div>
-				<div id="recipe" class="btn-group-vertical collapse in">
-					Рецепт:
-					<div class="btn btn-default" id="drop1">Элемент 1</div>
-					<div class="btn btn-default" id="drop2">Элемент 2</div>
-					<!--Element id goes here-->
-					{{form.first_recipe_el}}
-					{{form.second_recipe_el}}
+				<div id="recipe" class="collapse in">
+					<div class="collapse in btn-group-vertical">
+						Рецепт:
+						<div class="btn btn-default" id="drop1">Элемент 1</div>
+						<div class="btn btn-default" id="drop2">Элемент 2</div>
+						<!--Element id goes here-->
+						{{form.first_recipe_el}}
+						{{form.second_recipe_el}}
+					</div>
 				</div>
 			</div>
-			
+
 			<div class="form-group">
 				{{form.description.errors}}
 				<label for="description">Описание:</label>

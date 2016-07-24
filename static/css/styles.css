@@ -37,7 +37,3 @@ body {
 .table th, .table td {
 	text-align: center;
 }
-
-.tab-pane, .btn-group-vertical {
-	display: none
-}
