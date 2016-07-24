@@ -10,32 +10,16 @@
 {% endblock %}
 
 {% block javascript %}
-	<script src="/static/js/addelement.js"></script>
-	<script src="/static/js/tabs.js"></script>
+	<script src="/static/js/obj_load_drag.js"></script>
 	<script src="/static/js/game.js"></script>
 {% endblock %}
 
 {% block center %}
-
-
-	<div id="board">
-		<div id="menu">	
-			<a class="slidebtn" id="el_btn">X</a>
-			<a class="slidebtn" id="head_btn">Меню</a>
-		</div>	
-		<div class="tabs">
-		<ul class="tabs_caption">
-			<li class="active">Категория</li>
-			<li>Категория</li>
-		</ul>	
-		
-		<div class="tabs_content active">
-			<div id="list"></div>
+	<div class="col-xs-12">
+		<div class="col-xs-4 elements">
+			<ul class="nav nav-tabs"></ul>
+			<div class="tab-content"></div>
 		</div>
-				
-		<div class="tabs_content">	
-			
-		</div>
-	</div>
+		<div id="board"></div>
 	</div>
 {% endblock %}

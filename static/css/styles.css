@@ -37,3 +37,12 @@ body {
 .table th, .table td {
 	text-align: center;
 }
+
+.tab-pane, .btn-group-vertical {
+	display: none
+}
+
+#board  {
+  border: 2px solid green;
+  height: 90vh;
+}
