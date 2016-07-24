@@ -1,5 +1,5 @@
 function elementLoad(categoryId) {
-  $.getJSON("http://localhost:8000/alch-admin/get-elements-by-category/" + categoryId,function(elementData) {
+  $.getJSON( "/get-elements-by-category/" + categoryId,function(elementData) {
     for (var j = 0; j < elementData.elements.length; j++) {
       $("#" + categoryId).append($("<a>").addClass("btn btn-default select").text(elementData.elements[j].name).attr("el_id", elementData.elements[j].id));
 
@@ -14,7 +14,7 @@ function elementLoad(categoryId) {
 }
 
 $(document).ready(function() {
-  $.getJSON("http://localhost:8000/alch-admin/get_categories",function(categoryData) {
+  $.getJSON("/get_categories/",function(categoryData) {
     for (var i = 0; i < categoryData.categories.length; i++) {
       $(".nav-tabs").append($("<li>").append($("<a>").attr("data-toggle", "tab").attr("href", "#" + categoryData.categories[i].id).text(categoryData.categories[i].name)));
       $(".tab-content").append($("<div>").attr("id", categoryData.categories[i].id).addClass("tab-pane btn-group-vertical"));
