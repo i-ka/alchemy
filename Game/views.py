@@ -81,6 +81,25 @@ def element_list(request, category_id):
             })
     return HttpResponse(json.dumps(elements_dict))
 
+
+def get_user_open_element_list(request, category_id):
+	if not request.user.is_authenticated:
+		return HttpResponseForbidden()
+
+	category_id = int(category_id)
+	openElementsDict = {"elements": []}
+	userOpenElements = request.user.profile.open_elements.all()
+	for element in userOpenElements:
+		if (element.category.id == category_id):
+			openElementsDict['elements'].append({
+				'id': element.id,
+				'name': element.name,
+				'image': 'element.image'
+				})
+	return HttpResponse(json.dumps(openElementsDict))
+
+
+
 def check_element(request):
     """
     return json
