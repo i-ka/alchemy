@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .forms import RegisterForm
 from AlchemyCommon.models import Element, Category
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 import json
 # Create your views here.
 
@@ -79,3 +80,49 @@ def element_list(request, category_id):
             'id': el.id
             })
     return HttpResponse(json.dumps(elements_dict))
+
+def check_element(request):
+    """
+    return json
+
+    {
+        'success': bool
+        'newElement':{
+            'id':
+            'name':
+            'image':
+        }
+    }
+
+    """
+    if (not request.user.is_authenticated):
+        return HttpResponseForbidden()
+
+    if request.method == 'POST':
+        result = {'success': False}
+        element1 = int(request.POST['first_element'])
+        element2 = int(request.POST['second_element'])
+        if element1 > element2:
+            element1, element2 = element2, element1
+        try:
+            element1obj = Element.objects.get(pk=element1)
+            element2obj = Element.objects.get(pk=element2)
+            resultElement = Element.objects.get(first_recipe_el=element1,
+                                                second_recipe_el=element2)
+        except Element.DoesNotExist:
+            return HttpResponse(json.dumps(result))
+
+        userOpenElements = request.user.profile.open_elements
+        if resultElement in userOpenElements.all():
+            return HttpResponse(json.dumps(result))
+
+        if element1obj in userOpenElements.all() and element2obj in userOpenElements.all():
+            result['success'] = True
+            result['newElement'] = {'id': resultElement.id,
+                                    'name': resultElement.name,
+                                    'image': 'qwe.jpg'}
+            userOpenElements.add(resultElement)
+            return HttpResponse(json.dumps(result))
+        else:
+            return HttpResponse(json.dumps(result))
+    return HttpResponseForbidden()
