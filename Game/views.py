@@ -38,7 +38,7 @@ def registration(request):
     return render(request, 'Game/regform.html', {'form': form})
 
 
-def login(request):
+def login_view(request):
 	return HttpResponseForbidden() # this page forbidden for awhile
 	result = ''
 	if request.user.is_authenticated():

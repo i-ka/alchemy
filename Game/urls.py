@@ -12,5 +12,5 @@ urlpatterns = [
     url(r'get-elements-by-category/(?P<category_id>[0-9]+)',
         views.element_list, name='get-elements-by-cat'),
     url(r'get_categories', views.get_categories, name='get_categories'),
-    url(r'^new-login/$', views.login, name='new-login'),
+    url(r'^new-login/$', views.login_view, name='new-login'),
     ]
