@@ -1,5 +1,11 @@
 function elementLoad(categoryId) {
-  $.getJSON( "/get-elements-by-category/" + categoryId,function(elementData) {
+  var request;
+  if (document.getElementById("board")) {
+    request = "/get-open-elements-by-category/";
+  } else {
+    request = "/get-elements-by-category/";
+  }
+  $.getJSON( request + categoryId,function(elementData) {
     for (var j = 0; j < elementData.elements.length; j++) {
       $("#" + categoryId).append($("<a>").addClass("btn btn-default select").text(elementData.elements[j].name).attr("el_id", elementData.elements[j].id));
       $(".select").draggable({ helper: "clone" });
