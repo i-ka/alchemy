@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -54,6 +53,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 AUTH_PROFILE_MODULE = 'AlchemyCommon.models.UserProfile'
+
 
 ROOT_URLCONF = 'alchemysite.urls'
 
@@ -112,3 +112,22 @@ STATICFILES_DIRS = (
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL='/'
+
+#Mailing settings
+USE_FILE_MAIL_BACKEND = True
+
+if DEBUG or USE_FILE_MAIL_BACKEND:
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'tmp', 'mail')
+else:
+    #here smtp server settings
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = ''
+    EMAIL_PORT = ''
+    EMAIL_HOST_SUER = ''
+    EMAIL_HOST_PASSWORD = ''
+
+
+#Custom settings
+EMAIL_CONFIRM = True
+DOMAIN = 'http:\\127.0.0.1:8000'
