@@ -2,3 +2,4 @@
 *.pyc
 *.bat
 */__pycache__
+tmp
