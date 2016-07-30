@@ -45,6 +45,7 @@ class Element(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True, related_name='profile')
     open_elements = models.ManyToManyField(Element)
+    activationToken = models.TextField()
 
     def __str__(self):
         return self.user.username+"'s profile"
