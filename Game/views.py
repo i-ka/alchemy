@@ -34,7 +34,7 @@ def registration(request):
                 login(request, user)
                 return redirect('/')
             else:
-                return redirect('/')
+                return render(request, 'Game/email_confirm_notify.html')
     else:
         form = RegisterForm()
     return render(request, 'Game/regform.html', {'form': form})
