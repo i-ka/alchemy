@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
-from AlchemyCommon.models import Element, Category
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from AlchemyCommon.models import Element, Category, UserProfile
 from alchemysite import settings
 from .forms import RegisterForm
 import json
@@ -18,6 +18,13 @@ def index(request):
     else:
         return render(request, 'Game/index.html', {"text": "1"})
 
+
+def activation(request, activationToken):
+    userProfile = get_object_or_404(UserProfile, activationToken=activationToken)
+    user = userProfile.user
+    user.is_active = True
+    user.save()
+    return render(request, 'Game/activation_success_notify.html')
 
 def registration(request):
     if request.user.is_authenticated():
