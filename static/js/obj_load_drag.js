@@ -16,9 +16,8 @@ function elementLoad(categoryId) {
 $(document).ready(function() {
   $.getJSON("/get_categories/",function(categoryData) {
     for (var i = 0; i < categoryData.categories.length; i++) {
-      $(".nav-tabs").append($("<li>").append($("<a>").attr("data-toggle", "tab").attr("href", "#" + categoryData.categories[i].id).text(categoryData.categories[i].name)));
-      $(".tab-content").append($("<div>").attr("id", categoryData.categories[i].id).addClass("tab-pane btn-group-vertical"));
-
+      $(".nav-pills").append($("<li>").append($("<a>").attr("data-toggle", "pill").attr("href", "#" + categoryData.categories[i].id).text(categoryData.categories[i].name)));
+      $(".tab-content").append($("<div>").attr("id", categoryData.categories[i].id).addClass("tab-pane fade"));
       elementLoad(categoryData.categories[i].id);
     }
   });

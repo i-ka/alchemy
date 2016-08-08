@@ -2,7 +2,7 @@ body {
   background-color: #eee;
 }
 
-.form-signin, .elements{
+.form-signin {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
@@ -42,7 +42,15 @@ body {
 	display: none
 }
 
-#board  {
-  border: 2px solid green;
-  height: 90vh;
+#board {
+  height: 80vh;
+}
+
+.ui-draggable {
+  margin: 5px 2px 0 0;
+}
+
+.well {
+  padding: 10px;
+  margin-bottom: 5px;
 }
