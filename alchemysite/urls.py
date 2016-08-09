@@ -16,8 +16,11 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from AlchemyAdmin import urls as aladmin_urls
+from Game import urls as game_urls
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^alch-admin/',include('AlchemyAdmin.urls',namespace = 'aladmin')),
-    url(r'^',include('Game.urls',namespace = 'game')),
+    url(r'^alch-admin/',include(aladmin_urls, namespace = 'aladmin')),
+    url(r'^',include(game_urls, namespace = 'game')),
 ]
