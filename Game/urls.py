@@ -9,7 +9,7 @@ urlpatterns = [
         auth_views.login,
         {"template_name": "Game/loginform.html"},
         name='login'),
-    url(r'^logout/$', auth_views.login, name='logout'),
+    url(r'^logout/$', auth_views.logout_then_login, name='logout'),
     url(r'^registration/$', views.registration, name='registration'),
     url(r'get-elements-by-category/(?P<category_id>[0-9]+)',
         views.element_list, name='get-elements-by-cat'),
