@@ -132,8 +132,6 @@ def check_element(request):
             return HttpResponse(json.dumps(result))
 
         userOpenElements = request.user.profile.open_elements
-        if resultElement in userOpenElements.all():
-            return HttpResponse(json.dumps(result))
 
         if element1obj in userOpenElements.all() and element2obj in userOpenElements.all():
             result['success'] = True
