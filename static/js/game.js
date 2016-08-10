@@ -40,8 +40,11 @@ $(document).ready(function() {
           function onAjaxSuccess(data) {
             var elementData = $.parseJSON(data);
             if (elementData.success) {
-              $(".mixable").text(elementData.newElement.name).attr("el_id", elementData.newElement.id).removeClass("mixable");
-              $(".mixed").remove();
+              $(".mixable").text(elementData.newElement.name).attr("el_id", elementData.newElement.id).effect("highlight").removeClass("mixable");
+              $(".mixed").hide("pulsate").remove();
+            } else {
+              $(".mixable").effect("highlight", {color: "red"}).removeClass("mixable");
+              $(".mixed").effect("highlight", {color: "red"}).removeClass("mixed");
             }
           }
         }
