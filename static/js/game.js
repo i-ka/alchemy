@@ -42,6 +42,9 @@ $(document).ready(function() {
             if (elementData.success) {
               $(".mixable").text(elementData.newElement.name).attr("el_id", elementData.newElement.id).effect("highlight").removeClass("mixable");
               $(".mixed").hide("pulsate").remove();
+              if ($(".tab-content [el_id = "+ elementData.newElement.id +"]").length == 0) {
+                dataUpdate();
+              }
             } else {
               $(".mixable").effect("highlight", {color: "red"}).removeClass("mixable");
               $(".mixed").effect("highlight", {color: "red"}).removeClass("mixed");
