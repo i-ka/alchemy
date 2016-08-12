@@ -24,6 +24,8 @@ class ElementForm(forms.ModelForm):
         cleaned_data = super(ElementForm, self).clean()
         f_rec_el = cleaned_data.get('first_recipe_el')
         s_rec_el = cleaned_data.get('second_recipe_el')
+        if f_rec_el is None or s_rec_el is None:
+            raise forms.ValidationError("Не задан рецепт")
         if f_rec_el > s_rec_el:
             cleaned_data['first_recipe_el'] = s_rec_el
             cleaned_data['second_recipe_el'] = f_rec_el
