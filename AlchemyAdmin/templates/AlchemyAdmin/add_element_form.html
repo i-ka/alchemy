@@ -21,9 +21,9 @@
 	{{form.non_field_errors}}
 	<div class="col-xs-6">
 		{%if not update %}
-			<form class="form-signin" role="form" method="POST" action="{% url 'aladmin:create-element' %}">
+			<form class="form-signin center-block" role="form" method="POST" action="{% url 'aladmin:create-element' %}">
 		{%else%}
-			<form class="form-signin" role="form" method="POST" action="{% url 'aladmin:update-element' updated_element.id%}">
+			<form class="form-signin center-block" role="form" method="POST" action="{% url 'aladmin:update-element' updated_element.id%}">
 		{%endif%}
 			{%csrf_token%}
 			<div class="form-group">

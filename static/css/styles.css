@@ -4,17 +4,12 @@ body {
 
 .form-signin {
   max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
+  padding: 25px;
   text-align: center;
 }
 
 .table th, .table td {
   text-align: center;
-}
-
-.tab-pane, .btn-group-vertical {
-	display: none
 }
 
 #board {

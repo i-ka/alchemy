@@ -32,7 +32,7 @@
 					<li><a href="#">{{ user.get_username }}</a></li>
 					<li><a href="{% url 'game:logout' %}">Выход</a></li>
 					{% else %}
-					<li><a href="{% url 'game:login' %}">Вход</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#login-modal">Вход</a></li>
 					<li><a href="{% url 'game:registration' %}">Регистрация</a></li>
 					{% endif %}
 				</ul>
@@ -40,6 +40,40 @@
 		</div>
 	</div>
 <!--Content-->
+	<div class="modal fade" id="login-modal" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 class="modal-title text-center">Авторизация</h3>
+				</div>
+				<form class="modal-body" role="form" method="post" action="{%url 'game:login' %}">
+					{% csrf_token %}
+					{% if form.non_field_errors %}
+					<div class="alert alert-danger" role="alert"> {{form.non_field_errors.as_text}} </div>
+					{% endif %}
+					{% if form.username.errors%}
+					<div class="form-group has-error">
+						<strong class="help-block">{{form.username.errors.as_text}}</strong>
+					{% else %}
+					<div class="form-group">
+					{% endif %}
+						<input id="id_username" name="username" type="username" class="form-control" placeholder="Username" required autofocus>
+					</div>
+					{% if form.password.errors %}
+					<div class="form-group has-error">
+						<strong class="help-block">{{form.password.errors.as_text}}</strong>
+					{% else %}
+						<div class="form-group">
+					{% endif %}
+						<input id="id_password" name="password" type="password" class="form-control" placeholder="Password" required>
+					</div>
+					<button class="btn btn-primary btn-block" type="submit">Вход</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
 	<div class="container">
 		<div class="row">
 			{% block center %}{% endblock %}
