@@ -17,7 +17,7 @@ $(document).ready(function() {
   $("#board").droppable({
     accept: ".tab-pane a",
     drop: function() {
-      $(this).append($("<a>").attr("el_id", $(".ui-draggable-dragging").attr("el_id")).text($(".ui-draggable-dragging").text()));
+      $(this).append($("<a>").attr("el_id", $(".ui-draggable-dragging").attr("el_id")).css("left", $(".ui-draggable-dragging").css("left")).css("top", $(".ui-draggable-dragging").css("top")).text($(".ui-draggable-dragging").text()));
       $("#board a").addClass("btn btn-default").draggable({
         containment: "parent",
         stack: ".btn"

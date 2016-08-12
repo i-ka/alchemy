@@ -35,7 +35,7 @@ body {
 }
 
 .table th, .table td {
-	text-align: center;
+  text-align: center;
 }
 
 .tab-pane, .btn-group-vertical {
@@ -44,6 +44,11 @@ body {
 
 #board {
   height: 80vh;
+}
+
+#board  a{
+  width: auto;
+  position: absolute;
 }
 
 .ui-draggable {
