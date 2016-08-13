@@ -54,4 +54,7 @@ $(document).ready(function() {
       });
     }
   });
+  $("#clearall").click(function() {
+    $("#board a").fadeTo(1000, 0, function(){ $("#board a").remove(); });
+  });
 });

@@ -59,3 +59,12 @@ body {
   padding: 10px;
   margin-bottom: 5px;
 }
+
+#clearall {
+  float: right;
+  width: 36px;
+  height: 36px;
+  background: url(../img/trash.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
