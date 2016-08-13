@@ -62,8 +62,8 @@ body {
 
 #clearall {
   float: right;
-  width: 36px;
-  height: 36px;
+  width: 80px;
+  height: 80px;
   background: url(../img/trash.png);
   background-repeat: no-repeat;
   background-position: center;

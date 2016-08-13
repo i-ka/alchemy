@@ -41,7 +41,7 @@ $(document).ready(function() {
             var elementData = $.parseJSON(data);
             if (elementData.success) {
               $(".mixable").text(elementData.newElement.name).attr("el_id", elementData.newElement.id).effect("highlight").removeClass("mixable");
-              $(".mixed").hide("pulsate").remove();
+              $(".mixed").remove();
               if ($(".tab-content [el_id = "+ elementData.newElement.id +"]").length == 0) {
                 dataUpdate();
               }
@@ -55,6 +55,13 @@ $(document).ready(function() {
     }
   });
   $("#clearall").click(function() {
-    $("#board a").fadeTo(1000, 0, function(){ $("#board a").remove(); });
+    $("#board a").fadeTo(1000, 0, function() {
+      $("#board a").remove();
+    });
+  }).droppable({
+    greedy: true,
+    drop: function() {
+      $(".ui-draggable-dragging").remove();
+    }
   });
 });
