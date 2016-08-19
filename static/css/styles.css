@@ -68,3 +68,10 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+#lastElems {
+  position: relative;
+  float: left;
+  top: 98%;
+  opacity: 0.5;
+}

@@ -40,6 +40,7 @@ $(document).ready(function() {
           function onAjaxSuccess(data) {
             var elementData = $.parseJSON(data);
             if (elementData.success) {
+              $("#lastElems").text($(".mixed").text() + " + " + $(".mixable").text() + " = " + elementData.newElement.name);
               $(".mixable").text(elementData.newElement.name).attr("el_id", elementData.newElement.id).effect("highlight").removeClass("mixable");
               $(".mixed").remove();
               if ($(".tab-content [el_id = "+ elementData.newElement.id +"]").length == 0) {
