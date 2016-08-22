@@ -17,38 +17,38 @@ $(document).ready(function() {
   $("#board").droppable({
     accept: ".tab-pane a",
     drop: function() {
-      $(this).append($("<a>").attr("el_id", $(".ui-draggable-dragging").attr("el_id")).css("left", $(".ui-draggable-dragging").css("left")).css("top", $(".ui-draggable-dragging").css("top")).text($(".ui-draggable-dragging").text()));
+      $(this).append($("<a>")
+      .attr("el_id", $(".ui-draggable-dragging").attr("el_id"))
+      .css("left", $(".ui-draggable-dragging").css("left"))
+      .css("top", $(".ui-draggable-dragging").css("top"))
+      .text($(".ui-draggable-dragging").text()));
+
       $("#board a").addClass("btn btn-default").draggable({
         containment: "parent",
         stack: ".btn"
       }).droppable({
         greedy: true,
         drop: function() {
-          $(this).addClass("mixable");
-          $(".ui-draggable-dragging").addClass("mixed");
-
-          $.post(
-            "/check_elements/",
-            {
-              first_element: $(".mixable").attr("el_id"),
-              second_element: $(".mixed").attr("el_id"),
-              csrfmiddlewaretoken: getCookie("csrftoken")
-            },
-            onAjaxSuccess
-          );
+          var mixable = $(this);
+          var mixed = $(".ui-draggable-dragging");
+          $.post("/check_elements/", {
+            first_element: mixable.attr("el_id"),
+            second_element: mixed.attr("el_id"),
+            csrfmiddlewaretoken: getCookie("csrftoken")
+          }, onAjaxSuccess);
 
           function onAjaxSuccess(data) {
             var elementData = $.parseJSON(data);
             if (elementData.success) {
-              $("#lastElems").text($(".mixed").text() + " + " + $(".mixable").text() + " = " + elementData.newElement.name);
-              $(".mixable").text(elementData.newElement.name).attr("el_id", elementData.newElement.id).effect("highlight").removeClass("mixable");
-              $(".mixed").remove();
-              if ($(".tab-content [el_id = "+ elementData.newElement.id +"]").length == 0) {
+              $("#lastElems").text(mixed.text() + " + " + mixable.text() + " = " + elementData.newElement.name);
+              mixable.text(elementData.newElement.name).attr("el_id", elementData.newElement.id).effect("highlight");
+              mixed.remove();
+              if ($(".tab-content [el_id = " + elementData.newElement.id + "]").length == 0) {
                 dataUpdate();
               }
             } else {
-              $(".mixable").effect("highlight", {color: "red"}).removeClass("mixable");
-              $(".mixed").effect("highlight", {color: "red"}).removeClass("mixed");
+              mixable.effect("highlight", { color: "red" });
+              mixed.effect("highlight", { color: "red" });
             }
           }
         }
