@@ -129,5 +129,5 @@ else:
 
 
 #Custom settings
-EMAIL_CONFIRM = True
+EMAIL_CONFIRM = False
 DOMAIN = 'http:\\127.0.0.1:8000'
