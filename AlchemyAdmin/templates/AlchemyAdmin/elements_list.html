@@ -1,14 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Список элементов{% endblock %}
-
-{% block header%}
-	<li><a href="{% url 'aladmin:create-element' %}">Добавить элемент</a></li>
+{% block title %}
+	Список элементов
 {% endblock %}
 
 {% block center %}
+	<div class="text-center">
+		<h2>Список элементов</h2>
+		<a class="btn btn-success" href="{% url 'aladmin:create-element' %}">Добавить элемент</a>
+	</div>
 	{%if error%}
-		<p>Чтобы удалить элемент {{element_to_delete.name}} удалите или измените следущие элементы:</p>
+		<div class="text-center text-danger">
+			<h4>Чтобы удалить элемент {{element_to_delete.name}} удалите или измените следующие элементы</h4>
+		</div>
 	{%endif%}	
 		<table class="table table-condensed table-hover">
 			<thead>
@@ -31,9 +35,9 @@
 					<td>
 						{% if element.is_essential_element %}
 						Исходный элемент
-						{%else%}
+						{% else %}
 						{{element.first_recipe_el}}+{{element.second_recipe_el}}
-						{%endif%}
+						{% endif %}
 					</td>
 					<td>{{element.description}}</td>
 					<td>
@@ -41,8 +45,8 @@
 						<a href="{% url 'aladmin:del' element.id %}" class="btn btn-sm btn-danger">Удалить</a>
 					</td>
 				</tr>
-			{%empty%}Список элементов пуст
-			{%endfor%}
+			{% empty %}Список элементов пуст
+			{% endfor %}
 			</tbody>
 		</table>
 {% endblock %}
