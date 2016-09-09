@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="{% static 'js/modal_login.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/utils.js' %}"></script>
 	{%block javascript%}{%endblock%}
-	</head>
+</head>
 <body>
 <!--Header -->
 	<div class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -31,11 +31,14 @@
 				<ul class="nav navbar-nav navbar-right">
 					{% block header %}{% endblock %}
 					{% if user.is_authenticated %}
-					<li><a href="#">{{ user.get_username }}</a></li>
-					<li><a href="{% url 'game:logout' %}">Выход</a></li>
+						<li><a href="#">{{ user.get_username }}</a></li>
+						{% if user.is_staff %}
+							<li><a href="{% url 'aladmin:index' %}">Меню</a></li>
+						{% endif %}
+						<li><a href="{% url 'game:logout' %}">Выход</a></li>
 					{% else %}
-					<li><a href="#" data-toggle="modal" data-target="#login-modal">Вход</a></li>
-					<li><a href="{% url 'game:registration' %}">Регистрация</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#login-modal">Вход</a></li>
+						<li><a href="{% url 'game:registration' %}">Регистрация</a></li>
 					{% endif %}
 				</ul>
 			</div><!--/.nav-collapse -->

@@ -2,13 +2,6 @@
 
 {% block title %}Alchemy Game{% endblock %}
 
-{% block header%}
-	{% if user.is_staff %}
-		<li><a href="{% url 'aladmin:create-element' %}">Добавить элемент</a></li>
-		<li><a href="{% url 'aladmin:index' %}">Список элементов</a></li>
-	{% endif %}
-{% endblock %}
-
 {% block javascript %}
 	{% load staticfiles %}
 	<script type="text/javascript" src="{% static 'js/obj_load_drag.js' %}"></script>
