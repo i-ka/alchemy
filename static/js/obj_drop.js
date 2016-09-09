@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  $("#add-category-error").hide();
   $("[name=first_recipe_el], [name=second_recipe_el]").removeAttr("value");
   $("#drop1").droppable({
     drop: function() {
