@@ -29,6 +29,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					{% block header %}{% endblock %}
 					{% if user.is_authenticated %}
+					<li><a href="#">{{ user.get_username }}</a></li>
 					<li><a href="{% url 'game:logout' %}">Выход</a></li>
 					{% else %}
 					<li><a href="{% url 'game:login' %}">Вход</a></li>
