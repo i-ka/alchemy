@@ -1,9 +1,29 @@
 {% extends "base.html" %}
 
 {% block title %}
-    feedBackList
+	Жалобы/предложения
 {% endblock %}
 
 {% block center %}
-    <h1>feed Back List</h1>
+	<h2 class="text-center">Жалобы/предложения</h2>
+	<table class="table table-condensed table-hover">
+		<thead>
+			<tr>
+				<th>Пользователь</th>
+				<th>Обращение</th>
+				<th>Действие</th>
+			 </tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="#" class="btn btn-sm btn-success">✓</a>
+					<a href="#" class="btn btn-sm btn-danger">X</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 {% endblock %}
