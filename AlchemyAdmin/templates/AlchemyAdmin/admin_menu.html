@@ -1,9 +1,19 @@
 {% extends "base.html" %}
 
 {% block title %}
-    adminMenu
+	Меню администратора
 {% endblock %}
 
 {% block center %}
-    <h1>Admin Menu</h1>
+	<h2 class="text-center">Управление сайтом</h2>
+	<div class="col-xs-6 list-group">
+		<a class="list-group-item text-center" href="{% url 'aladmin:elements-list' %}">Список элементов</a>
+		<a class="list-group-item text-center" href="{% url 'aladmin:users-list' %}">Список пользователей</a>
+		<a class="list-group-item text-center" href="{% url 'aladmin:feedback-list' %}">Жалобы/предложения</a>
+	</div>
+	<div class="col-xs-6 well">
+		<h4>Категории:</h4>
+		<h4>Элементы:</h4>
+		<h4>Пользователи:</h4>
+	</div>
 {% endblock %}
