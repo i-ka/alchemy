@@ -1,9 +1,38 @@
 {% extends "base.html" %}
 
 {% block title %}
-    usersList
+	Список пользователей
 {% endblock %}
 
 {% block center %}
-    <h1>Users List</h1>
+	<h2 class="text-center">Список пользователей</h2>
+	<table class="table table-condensed table-hover">
+			<thead>
+			<tr>
+				<th>Пользователь</th>
+				<th>Действие</th>
+			 </tr>
+		</thead>
+
+		<tbody>
+		{% for user in users %}
+			{% if user.is_staff %}
+				<tr class="bg-info">
+			{% elif not user.is_active %}
+				<tr class="bg-danger">
+			{% else %}
+				<tr>
+			{% endif %}
+				<td>{{ user.username }}</td>
+				<td>
+				{% if user.is_active %}
+					<a href="#" class="btn btn-sm btn-danger">Заблокировать</a>
+				{% else %}
+					<a href="#" class="btn btn-sm btn-info">Разблокировать</a>
+				{% endif %}
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}
