@@ -8,10 +8,23 @@ from django.http import HttpResponse
 
 @permission_required('AlchemyCommon.can_change_element', login_url='/login/', raise_exception=True)
 def index(request):
+    return render(request, 'AlchemyAdmin/admin_menu.html')
+
+@permission_required('AlchemyCommon.can_change_element', login_url='/login/', raise_exception=True)
+def elements_list(request):
     all_elements = Element.objects.all()
-    return render(request, 'AlchemyAdmin/index.html', {
+    return render(request, 'AlchemyAdmin/elements_list.html', {
             'elements': all_elements,
         })
+
+@permission_required('auth.can_change_user', login_url='/login/', raise_exception=True)
+def users_list(request):
+    users = User.objects.all()
+    return render(request, 'AlchemyAdmin/users_list.html')
+
+#permissions check here
+def feedback_list(request):
+    return render(request, 'AlchemyAdmin/feedback_list.html')
 
 @permission_required('AlchemyCommon.can_delete_element', login_url='/login/', raise_exception=True)
 def remove_element(request, el_id):
