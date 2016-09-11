@@ -20,7 +20,7 @@ def elements_list(request):
 @permission_required('auth.can_change_user', login_url='/login/', raise_exception=True)
 def users_list(request):
     users = User.objects.all()
-    return render(request, 'AlchemyAdmin/users_list.html')
+    return render(request, 'AlchemyAdmin/users_list.html', {'users': users})
 
 #permissions check here
 def feedback_list(request):
