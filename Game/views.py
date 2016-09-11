@@ -48,23 +48,24 @@ def registration(request):
 
 
 def login_view(request):
-	return HttpResponseForbidden() # this page forbidden for awhile
-	result = ''
-	if request.user.is_authenticated():
-		result = 'alreadyLogIn'
-	if request.method == 'POST':
-		user = authenticate(username=request.POST['username'], password=request.POST['password'])
-		if user is not None:
-			if user.is_active:
-				login(request,user)
-				result = 'success'
-			else:
-				result = 'userNotActive'
-		else:
-			result = 'wrongPassOrLogin'
-	else: 
-		return HttpResponseForbidden()
-	return HttpResponse(result)
+    if (not request.is_ajax()):
+        return HttpResponseForbidden()
+    result = ''
+    if request.user.is_authenticated():
+        result = 'alreadyLogIn'
+    if request.method == 'POST':
+        user = authenticate(username=request.POST['username'], password=request.POST['password'])
+        if user is not None:
+            if user.is_active:
+                login(request,user)
+                result = 'success'
+            else:
+                result = 'userNotActive'
+        else:
+            result = 'wrongPassOrLogin'
+    else:
+        return HttpResponseForbidden()
+    return HttpResponse(result)
 
 
 def get_categories(request):
