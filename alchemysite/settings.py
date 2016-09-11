@@ -110,7 +110,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'static'),
     )
 
-LOGIN_URL = '/login/'
+LOGIN_URL = '/'
 LOGIN_REDIRECT_URL='/'
 
 #Mailing settings
