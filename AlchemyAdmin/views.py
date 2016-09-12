@@ -40,7 +40,7 @@ def remove_element(request, el_id):
     print(conflict_elements)
     if not conflict_elements:
         element_to_delete.delete()
-        return redirect('/alch-admin')
+        return redirect('/alch-admin/elements-list')
     error = True
     return render(request, 'AlchemyAdmin/index.html', {
         'element_to_delete': element_to_delete,
@@ -55,7 +55,7 @@ def update_element(request, el_id):
         form = ElementForm(request.POST, instance=updated_element)
         if form.is_valid():
             form.save()
-            return redirect('/alch-admin')
+            return redirect('/alch-admin/elements-list')
     else:
         form = ElementForm(instance=updated_element)
     return render(request, 'AlchemyAdmin/add_element_form.html', {
@@ -73,7 +73,7 @@ def create_element(request):
             if form.instance.is_essential_element():
                 for user in User.objects.all():
                     user.profile.open_elements.add(form.instance)
-            return redirect('/alch-admin')
+            return redirect('/alch-admin/elements-list')
     else:
         form = ElementForm()
     return render(request, 'AlchemyAdmin/add_element_form.html', {
