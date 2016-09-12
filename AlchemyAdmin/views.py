@@ -54,7 +54,7 @@ def remove_element(request, el_id):
         element_to_delete.delete()
         return redirect('/alch-admin/elements-list')
     error = True
-    return render(request, 'AlchemyAdmin/index.html', {
+    return render(request, 'AlchemyAdmin/elements_list.html', {
         'element_to_delete': element_to_delete,
         'error': error,
         'elements': conflict_elements
