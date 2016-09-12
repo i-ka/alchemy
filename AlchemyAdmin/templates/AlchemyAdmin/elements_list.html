@@ -4,17 +4,23 @@
 	Список элементов
 {% endblock %}
 
+{%block javascript%}
+	<script src="/static/js/table_search.js"></script>
+{%endblock%}
+
 {% block center %}
-	<div class="text-center">
-		<h2>Список элементов</h2>
-		<a class="btn btn-success" href="{% url 'aladmin:create-element' %}">Добавить элемент</a>
+	<h2 class="text-center">Список элементов</h2>
+	<a class="btn btn-success pull-left" href="{% url 'aladmin:create-element' %}">Добавить элемент</a>
+	<div class="form-group pull-right">
+		<input type="text" class="search form-control" placeholder="Поиск...">
 	</div>
+	<span class="counter pull-right"></span>
 	{%if error%}
 		<div class="text-center text-danger">
 			<h4>Чтобы удалить элемент {{element_to_delete.name}} удалите или измените следующие элементы</h4>
 		</div>
 	{%endif%}	
-		<table class="table table-condensed table-hover">
+		<table class="table table-condensed table-hover results">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -23,7 +29,12 @@
 					<th>Рецепт</th>
 					<th>Описание</th>
 					<th>Действие</th>
-				 </tr>
+				</tr>
+				<tr class="warning no-result">
+				<td colspan="6">
+					Элементы не найдены
+				</td>
+			</tr>
 			</thead>
 		 
 			<tbody>	

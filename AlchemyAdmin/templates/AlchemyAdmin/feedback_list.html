@@ -4,15 +4,26 @@
 	Жалобы/предложения
 {% endblock %}
 
+{%block javascript%}
+	<script src="/static/js/table_search.js"></script>
+{%endblock%}
+
 {% block center %}
 	<h2 class="text-center">Жалобы/предложения</h2>
-	<table class="table table-condensed table-hover">
+	<div class="form-group pull-right">
+		<input type="text" class="search form-control" placeholder="Поиск...">
+	</div>
+	<span class="counter pull-right"></span>
+	<table class="table table-condensed table-hover results">
 		<thead>
 			<tr>
 				<th>Пользователь</th>
 				<th>Обращение</th>
 				<th>Действие</th>
-			 </tr>
+			</tr>
+			<td colspan="3">
+				Отзывы не найдены
+			</td>
 		</thead>
 
 		<tbody>
