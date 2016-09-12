@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import permission_required
 from AlchemyCommon.models import Element, Category, User
 from .forms import ElementForm
@@ -28,6 +28,18 @@ def elements_list(request):
 def users_list(request):
     users = User.objects.all()
     return render(request, 'AlchemyAdmin/users_list.html', {'users': users})
+
+@permission_required('auth.can_change_user', login_url='/login/', raise_exception=True)
+def set_user_active(request, userId, active):
+    user = get_object_or_404(User, pk=userId)
+    if active == '0':
+        user.is_active = False
+    elif active == '1':
+        user.is_active = True
+    user.save()
+    return redirect('/alch-admin/users-list')
+
+
 
 #permissions check here
 def feedback_list(request):

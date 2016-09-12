@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'feedback-list', views.feedback_list, name='feedback-list'),
     url(r'users-list', views.users_list, name='users-list'),
     url(r'create-category', views.create_category, name='create-category'),
+    url(r'set-user-active/(?P<userId>[0-9]+)/(?P<active>[0-9])', views.set_user_active, name='set-user-active'),
 ]

@@ -25,10 +25,12 @@
 			{% endif %}
 				<td>{{ user.username }}</td>
 				<td>
-				{% if user.is_active %}
-					<a href="#" class="btn btn-sm btn-danger">Заблокировать</a>
-				{% else %}
-					<a href="#" class="btn btn-sm btn-info">Разблокировать</a>
+				{% if not user.is_staff %}
+					{% if user.is_active%}
+						<a href="{% url 'aladmin:set-user-active' user.id 0 %}" class="btn btn-sm btn-danger">Заблокировать</a>
+					{% else %}
+						<a href="{% url 'aladmin:set-user-active' user.id 1 %}" class="btn btn-sm btn-primary">Разблокировать</a>
+					{% endif %}
 				{% endif %}
 				</td>
 			</tr>
