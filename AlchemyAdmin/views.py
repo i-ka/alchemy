@@ -8,7 +8,14 @@ from django.http import HttpResponse
 
 @permission_required('AlchemyCommon.can_change_element', login_url='/login/', raise_exception=True)
 def index(request):
-    return render(request, 'AlchemyAdmin/admin_menu.html')
+    users_count = User.objects.count()
+    elements_count = Element.objects.count()
+    categories_count = Category.objects.count()
+    return render(request, 'AlchemyAdmin/admin_menu.html', {
+        'users_count': users_count,
+        'elements_count': elements_count,
+        'categories_count': categories_count
+        })
 
 @permission_required('AlchemyCommon.can_change_element', login_url='/login/', raise_exception=True)
 def elements_list(request):

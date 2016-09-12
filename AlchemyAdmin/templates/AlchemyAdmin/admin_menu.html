@@ -12,8 +12,8 @@
 		<a class="list-group-item text-center" href="{% url 'aladmin:feedback-list' %}">Жалобы/предложения</a>
 	</div>
 	<div class="col-xs-6 well">
-		<h4>Категории:</h4>
-		<h4>Элементы:</h4>
-		<h4>Пользователи:</h4>
+		<h4>Категории: {{ categories_count }}</h4>
+		<h4>Элементы: {{ elements_count }}</h4>
+		<h4>Пользователи: {{ users_count }}</h4>
 	</div>
 {% endblock %}
