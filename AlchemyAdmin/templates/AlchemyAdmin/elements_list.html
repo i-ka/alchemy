@@ -9,7 +9,14 @@
 {%endblock%}
 
 {% block center %}
-	<h2 class="text-center">Список элементов</h2>
+	<div class="text-center">
+		<div class="btn-group text-center">
+			<a type="button" class="btn btn-lg btn-primary active" href="{% url 'aladmin:elements-list' %}">Список элементов</a>
+			<a type="button" class="btn btn-lg btn-default" href="{% url 'aladmin:users-list' %}">Список пользователей</a>
+			<a type="button" class="btn btn-lg btn-default" href="{% url 'aladmin:feedback-list' %}">Жалобы/предложения</a>
+		</div>
+	</div>
+
 	<a class="btn btn-success pull-left" href="{% url 'aladmin:create-element' %}">Добавить элемент</a>
 	<div class="form-group pull-right">
 		<input type="text" class="search form-control" placeholder="Поиск...">
