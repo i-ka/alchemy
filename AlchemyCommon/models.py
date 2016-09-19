@@ -42,6 +42,14 @@ class Element(models.Model):
             return conflict_elements
 
 
+class Report(models.Model):
+    user = models.ForeignKey(User)
+    accepted = models.NullBooleanField(null=True)
+    text = models.TextField(max_length=500, blank=False)
+    screenshot = models.ImageField(upload_to='report_screenshots/', blank=True)
+    date = models.DateTimeField(auto_now=True)
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True, related_name='profile')
     open_elements = models.ManyToManyField(Element)
