@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'create-element', views.create_element, name='create-element'),
     url(r'update_element/(?P<el_id>[0-9]+)',
         views.update_element, name='update-element'),
+    url(r'create-category', views.create_category, name='create-category')
 ]

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import permission_required
 from AlchemyCommon.models import Element, Category, User
 from .forms import ElementForm
+from django.http import HttpResponse
 # Create your views here.
 
 
@@ -58,3 +59,15 @@ def create_element(request):
     return render(request, 'AlchemyAdmin/add_element_form.html', {
         'form': form,
         })
+
+@permission_required('AlchemyCommon.can_add_category', login_url='/login/', raise_exception=True)
+def create_category(request):
+    name = request.POST.get('name', False)
+    if (not name):
+        return HttpResponse('failed')
+    if (not Category.objects.filter(name=name).exists()):
+        new_category = Category(name=name)
+        new_category.save()
+        return HttpResponse('success')
+    else:
+        return HttpResponse('failed')
