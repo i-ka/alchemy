@@ -9,8 +9,9 @@
 {% endblock %}
 	
 {% block javascript %}
-	<script src="/static/js/obj_load_drag.js"></script>
-	<script src="/static/js/obj_drop.js"></script>
+	{% load staticfiles %}
+	<script type="text/javascript" src="{% static 'js/obj_load_drag.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/element_page.js' %}"></script>
 {% endblock %}
 
 {% block header%}

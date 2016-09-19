@@ -10,8 +10,9 @@
 {% endblock %}
 
 {% block javascript %}
-	<script src="/static/js/obj_load_drag.js"></script>
-	<script src="/static/js/game.js"></script>
+	{% load staticfiles %}
+	<script type="text/javascript" src="{% static 'js/obj_load_drag.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/game.js' %}"></script>
 {% endblock %}
 
 {% block center %}
