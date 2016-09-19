@@ -22,11 +22,11 @@
 	<div class="modal fade" id="addCategory" role="dialog">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-				<form id="modal-add-category" class="modal-body" role="form" method="post" action="#">
+				<form id="modal-add-category" class="modal-body" role="form" method="post" action="{% url 'aladmin:create-category' %}">
 					{% csrf_token %}
 					<div id="add-category-error" class="alert alert-danger" role="alert"></div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Новая категория">
+						<input type="text" class="form-control" name="name" placeholder="Новая категория">
 					</div>
 					<button class="btn btn-success btn-block" type="submit">Добавить</button>
 				</form>

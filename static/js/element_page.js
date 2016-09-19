@@ -1,5 +1,24 @@
 $(document).ready(function() {
   $("#add-category-error").hide();
+  $("#modal-add-category").submit(function() {
+    event.preventDefault();
+    $.post($(this).attr("action"), $("#modal-add-category").serialize(), function(data) {
+      var error = "noErrors";
+      switch (data) {
+        case "failed":
+          error = "Такая категория уже существует";
+          break;
+        case "success":
+          location.reload();
+          break;
+      }
+      if (error != "noErrors") {
+        $("#add-category-error").show();
+        $("#add-category-error").text(error);
+      }
+    });
+  });
+
   $("[name=first_recipe_el], [name=second_recipe_el]").removeAttr("value");
   $("#drop1").droppable({
     drop: function() {
