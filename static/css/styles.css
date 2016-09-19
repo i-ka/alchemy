@@ -8,7 +8,8 @@ body {
   text-align: center;
 }
 
-.table th, .table td {
+.table thead>tr>th, .table tbody>tr>td {
+  vertical-align: middle;
   text-align: center;
 }
 
@@ -16,7 +17,7 @@ body {
   height: 80vh;
 }
 
-#board  a{
+#board  a {
   width: auto;
   position: absolute;
 }
