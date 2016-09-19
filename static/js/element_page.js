@@ -1,3 +1,18 @@
+function dropsFill() {
+  if ($("[name=first_recipe_el]").val() != "" && $("[name=second_recipe_el]").val() != "") {
+    if ($("[name=first_recipe_el]").val() != 0 && $("[name=second_recipe_el]").val() != 0) {
+      $("#drop1").text($("[el_id = " + $("[name=first_recipe_el]").val() + "]").text());
+      $("#drop2").text($("[el_id = " + $("[name=second_recipe_el]").val() + "]").text());
+      $("#drop1, #drop2").removeClass("btn-default").addClass("btn-info");
+    } else {
+      $("[name=orig_check]").attr("checked", true);
+      $("#recipe").removeClass("in");
+    }
+  } else {
+    $("[name=first_recipe_el], [name=second_recipe_el]").removeAttr("value");
+  }
+}
+
 $(document).ready(function() {
   $("#add-category-error").hide();
   $("#modal-add-category").submit(function() {
@@ -19,7 +34,6 @@ $(document).ready(function() {
     });
   });
 
-  $("[name=first_recipe_el], [name=second_recipe_el]").removeAttr("value");
   $("#drop1").droppable({
     drop: function() {
       $(this).text($(".ui-draggable-dragging").text());
