@@ -58,3 +58,8 @@ body {
   padding: 8px;
   opacity: 0.5;
 }
+
+.errorlist {
+  list-style-type: none;
+  margin: 0;
+}

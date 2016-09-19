@@ -14,6 +14,7 @@ function dropsFill() {
 }
 
 $(document).ready(function() {
+  $(".errorlist").addClass("alert alert-danger");
   $("#add-category-error").hide();
   $("#modal-add-category").submit(function() {
     event.preventDefault();
