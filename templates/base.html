@@ -31,11 +31,18 @@
 				<ul class="nav navbar-nav navbar-right">
 					{% block header %}{% endblock %}
 					{% if user.is_authenticated %}
-						<li><a href="#">{{ user.get_username }}</a></li>
-						{% if user.is_staff %}
-							<li><a href="{% url 'aladmin:index' %}">Меню</a></li>
-						{% endif %}
-						<li><a href="{% url 'game:logout' %}">Выход</a></li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								{{ user.get_username }} <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								{% if user.is_staff %}
+									<li><a href="{% url 'aladmin:index' %}">Меню</a></li>
+								{% endif %}
+								<li role="separator" class="divider"></li>
+								<li><a href="{% url 'game:logout' %}">Выход</a></li>
+							</ul>
+						</li>
 					{% else %}
 						<li><a href="#" data-toggle="modal" data-target="#login-modal">Вход</a></li>
 						<li><a href="{% url 'game:registration' %}">Регистрация</a></li>
