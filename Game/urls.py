@@ -18,5 +18,6 @@ urlpatterns = [
     url(r'check_element', views.check_element, name='check_element'),
     url(r'get-open-elements-by-category/(?P<category_id>[0-9]+)',
         views.get_user_open_element_list, name='get-open-elements-by-cat'),
-    url(r'activate/(?P<activationToken>[a-f0-9]+)', views.activation, name='activation')
+    url(r'activate/(?P<activationToken>[a-f0-9]+)', views.activation, name='activation'),
+    url(r'feedback', views.feedback, name='feedback'),
     ]

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Обратная связь
+{% endblock %}
+
+{% block center %}
+<h3 class="text-center">На этой странице Вы можете связаться с нами <br><small>К сообщению об ошибке просьба прикладывать снимок экрана</small></h3>
+	<form class="form-signin center-block" role="form" method="POST" enctype="multipart/form-data" action="{% url 'game:feedback' %}">
+		{% csrf_token %}
+		{% if error %}
+			<div class="form-group has-error">
+			<strong class="help-block">{{error}}</strong>
+		{% else %}
+			<div class="form-group text-center">
+		{% endif %}
+			{{ report_form.text }}
+		</div>
+		<div class="form-group text-center">
+			<input id="id_screenshot" type="file" class="" name="screenshot">
+		</div>
+		<button type="submit" class="btn btn-block btn-success">Отправить</button>
+	</form>
+{% endblock %}

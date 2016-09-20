@@ -39,6 +39,7 @@
 								{% if user.is_staff %}
 									<li><a href="{% url 'aladmin:index' %}">Меню</a></li>
 								{% endif %}
+								<li><a href="{% url 'game:feedback' %}">Обратная связь</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="{% url 'game:logout' %}">Выход</a></li>
 							</ul>

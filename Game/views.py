@@ -19,6 +19,10 @@ def index(request):
         return render(request, 'Game/index.html', {"text": "1"})
 
 
+def feedback(request):
+    return render(request, 'Game/feedback.html')
+
+
 def activation(request, activationToken):
     userProfile = get_object_or_404(UserProfile, activationToken=activationToken)
     user = userProfile.user
