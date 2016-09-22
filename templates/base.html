@@ -37,16 +37,16 @@
 							</a>
 							<ul class="dropdown-menu">
 								{% if user.is_staff %}
-									<li><a href="{% url 'aladmin:index' %}">Меню</a></li>
+									<li><a href="{% url 'aladmin:index' %}"><span class="glyphicon glyphicon-cog"></span> Управление сайтом</a></li>
 								{% endif %}
-								<li><a href="{% url 'game:feedback' %}">Обратная связь</a></li>
+								<li><a href="{% url 'game:feedback' %}"><span class="glyphicon glyphicon glyphicon-transfer"></span> Обратная связь</a></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="{% url 'game:logout' %}">Выход</a></li>
+								<li><a href="{% url 'game:logout' %}"><span class="glyphicon glyphicon-log-out"></span> Выход</a></li>
 							</ul>
 						</li>
 					{% else %}
-						<li><a href="#" data-toggle="modal" data-target="#login-modal">Вход</a></li>
-						<li><a href="{% url 'game:registration' %}">Регистрация</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Вход</a></li>
+						<li><a href="{% url 'game:registration' %}"><span class="glyphicon glyphicon-new-window"></span> Регистрация</a></li>
 					{% endif %}
 				</ul>
 			</div><!--/.nav-collapse -->

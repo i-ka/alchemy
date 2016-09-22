@@ -18,7 +18,7 @@
 		</div>
 	</div>
 
-	<a class="btn btn-success" href="{% url 'aladmin:create-element' %}">Добавить элемент</a>
+	<a class="btn btn-success" href="{% url 'aladmin:create-element' %}"><span class="glyphicon glyphicon-plus"></span> Добавить элемент</a>
 	{%if error%}
 		<div class="text-center text-danger">
 			<h4>Чтобы удалить элемент {{element_to_delete.name}} удалите или измените следующие элементы</h4>
@@ -51,8 +51,8 @@
 					</td>
 					<td>{{element.description}}</td>
 					<td>
-						<a href="{% url 'aladmin:update-element' element.id %}" class="btn btn-sm btn-warning">Изменить</a>
-						<a href="{% url 'aladmin:del' element.id %}" class="btn btn-sm btn-danger">Удалить</a>
+						<a href="{% url 'aladmin:update-element' element.id %}" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
+						<a href="{% url 'aladmin:del' element.id %}" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
 					</td>
 				</tr>
 				{% empty %}

@@ -35,9 +35,9 @@
 				<a href="{{report.screenshot.url}}" target="_blank"><img class="img-thumbnail w-1" src="{{report.screenshot.url}}"></a>
 			</div>
 		{% endif %}
-		<a href="{% url 'aladmin:feedback-list' 'all' %}" class="btn btn-sm btn-default">К списку</a>
-		<a href="{% url 'aladmin:set-report' report.id 'accepted' %}?next={{request.path}}" class="btn btn-sm btn-success">Принять</a>
-		<a href="{% url 'aladmin:set-report' report.id 'rejected' %}?next={{request.path}}" class="btn btn-sm btn-danger">Отклонить</a>
-		<a href="{% url 'aladmin:delete-report' report.id %}" class="btn btn-sm btn-warning">Удалить</a>
+		<a href="{% url 'aladmin:feedback-list' 'all' %}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-th-list"></span> К списку</a>
+		<a href="{% url 'aladmin:set-report' report.id 'accepted' %}?next={{request.path}}" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-ok"></span> Принять</a>
+		<a href="{% url 'aladmin:set-report' report.id 'rejected' %}?next={{request.path}}" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove"></span> Отклонить</a>
+		<a href="{% url 'aladmin:delete-report' report.id %}" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-trash"></span> Удалить</a>
 	</div>
 {% endblock %}

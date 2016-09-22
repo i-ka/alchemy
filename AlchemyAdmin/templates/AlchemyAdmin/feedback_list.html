@@ -48,9 +48,9 @@
 						<td>{{report.text|slice:":20"}}...</td>
 						<td>{{report.date|naturaltime}}</td>
 						<td>
-							<a href="{% url 'aladmin:set-report' report.id 'accepted' %}?next={{request.path}}" class="btn btn-sm btn-success">✓</a>
-							<a href="{% url 'aladmin:set-report' report.id 'rejected' %}?next={{request.path}}" class="btn btn-sm btn-danger">X</a>
-							<a href="{% url 'aladmin:report-details' report.id %}" class="btn btn-sm btn-primary">More</a>
+							<a href="{% url 'aladmin:set-report' report.id 'accepted' %}?next={{request.path}}" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-ok"></span></a>
+							<a href="{% url 'aladmin:set-report' report.id 'rejected' %}?next={{request.path}}" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+							<a href="{% url 'aladmin:report-details' report.id %}" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon glyphicon glyphicon-info-sign"></span></a>
 						</td>
 					</tr>
 				{% empty %}
