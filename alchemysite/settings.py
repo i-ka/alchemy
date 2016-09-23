@@ -131,3 +131,7 @@ else:
 #Custom settings
 EMAIL_CONFIRM = False
 DOMAIN = 'http:\\127.0.0.1:8000'
+
+#Mediafiles settings
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
