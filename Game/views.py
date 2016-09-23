@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from AlchemyCommon.models import Element, Category, UserProfile
+from AlchemyCommon.models import Element, Category, UserProfile, Report
 from alchemysite import settings
-from .forms import RegisterForm
+from .forms import RegisterForm, ReportForm
 import json
 # Create your views here.
 
@@ -19,8 +19,22 @@ def index(request):
         return render(request, 'Game/index.html', {"text": "1"})
 
 
+@login_required()
 def feedback(request):
-    return render(request, 'Game/feedback.html')
+    error = False
+    if request.method == 'POST':
+        report_form = ReportForm(request.POST, request.FILES)
+        if (report_form['text'].value() != ''):
+            newreport = Report(text=request.POST['text'], user=request.user)
+            if (request.FILES.get('screenshot', False)):
+                newreport.screenshot = request.FILES['screenshot']
+            newreport.save()
+            return redirect('/')
+        else:
+            error = 'Заполните текст жалобы/предложения'
+    else:
+        report_form = ReportForm()
+    return render(request, 'Game/feedback.html', {'report_form': report_form, 'error': error})
 
 
 def activation(request, activationToken):

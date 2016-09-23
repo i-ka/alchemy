@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from alchemysite import settings
 from django.core.mail import EmailMessage
 
-from AlchemyCommon.models import UserProfile
+from AlchemyCommon.models import UserProfile, Report
 from AlchemyCommon.utils import getActivationEmailText
 # Create your views here.
 
@@ -57,3 +57,19 @@ class RegisterForm(forms.Form):
         if (self.cleaned_data["pass2"] != self.cleaned_data.get("pass1", "")):
             raise forms.ValidationError("Пароли не совпадают")
         return self.cleaned_data["pass2"]
+
+
+class ReportForm(forms.ModelForm):
+
+    class Meta:
+        model = Report
+
+        fields = [
+            'text',
+            'screenshot'
+        ]
+
+        widgets = {
+            'text': forms.Textarea(attrs={'class':'form-control', 'placeholder': 'Текст жалобы/предложения'}),
+            'screenshot': forms.ImageField()
+        }
