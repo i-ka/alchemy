@@ -53,8 +53,8 @@
 						<td>{{report.date|naturaltime}}</td>
 						<td>
 							<a href="#" class="btn btn-sm btn-primary">More</a>
-							<a href="#" class="btn btn-sm btn-success">✓</a>
-							<a href="#" class="btn btn-sm btn-danger">X</a>
+							<a href="{% url 'aladmin:set-report' report.id 'accepted' %}?next={{request.path}}" class="btn btn-sm btn-success">✓</a>
+							<a href="{% url 'aladmin:set-report' report.id 'rejected' %}?next={{request.path}}" class="btn btn-sm btn-danger">X</a>
 						</td>
 					</tr>
 			{% empty %}

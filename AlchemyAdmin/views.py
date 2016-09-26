@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import permission_required
+from django.core.urlresolvers import reverse
 from AlchemyCommon.models import Element, Category, User, Report
 from .forms import ElementForm
 from django.http import HttpResponse, Http404
@@ -54,6 +55,25 @@ def feedback_list(request, filter):
     else:
         raise Http404()
     return render(request, 'AlchemyAdmin/feedback_list.html', { 'report_list': reports })
+
+
+@permission_required('AlchemyCommon.can_change_report', raise_exception=True)
+def set_report(request, reportId, val):
+    rep = get_object_or_404(Report, pk=reportId)
+    if val == 'accepted':
+        value = True
+    elif val == 'rejected':
+        value = False
+    else:
+        raise Http404()
+    if value != rep.accepted:
+        rep.accepted = value
+        rep.save()
+    redirect_url = request.GET.get('next', False)
+    if redirect_url:
+        return redirect(redirect_url)
+    else:
+        return redirect(reverse('aladmin:feedback-list', args=('all',)))
 
 
 @permission_required('AlchemyCommon.can_delete_element', login_url='/login/', raise_exception=True)
