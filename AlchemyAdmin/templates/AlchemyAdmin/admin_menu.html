@@ -9,7 +9,7 @@
 	<div class="col-xs-6 list-group">
 		<a class="list-group-item btn btn-lg" href="{% url 'aladmin:elements-list' %}">Список элементов</a>
 		<a class="list-group-item btn btn-lg" href="{% url 'aladmin:users-list' %}">Список пользователей</a>
-		<a class="list-group-item btn btn-lg" href="{% url 'aladmin:feedback-list' %}">Жалобы/предложения</a>
+		<a class="list-group-item btn btn-lg" href="{% url 'aladmin:feedback-list' 'all' %}">Жалобы/предложения</a>
 	</div>
 	<div class="col-xs-6 well">
 		<h4>Категории: {{ categories_count }}</h4>

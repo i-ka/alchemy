@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'update_element/(?P<el_id>[0-9]+)',
         views.update_element, name='update-element'),
     url(r'elements-list', views.elements_list, name='elements-list'),
-    url(r'feedback-list', views.feedback_list, name='feedback-list'),
+    url(r'feedback-list/(?P<filter>[a-z]*)', views.feedback_list, name='feedback-list'),
     url(r'users-list', views.users_list, name='users-list'),
     url(r'create-category', views.create_category, name='create-category'),
     url(r'set-user-active/(?P<userId>[0-9]+)/(?P<active>[0-9])', views.set_user_active, name='set-user-active'),

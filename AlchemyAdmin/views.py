@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import permission_required
-from AlchemyCommon.models import Element, Category, User
+from AlchemyCommon.models import Element, Category, User, Report
 from .forms import ElementForm
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 # Create your views here.
 
 
@@ -41,9 +41,20 @@ def set_user_active(request, userId, active):
 
 
 
-#permissions check here
-def feedback_list(request):
-    return render(request, 'AlchemyAdmin/feedback_list.html')
+@permission_required('AlchemyCommon.can_change_report', raise_exception=True)
+def feedback_list(request, filter):
+    if filter == 'accepted':
+        reports = Report.objects.filter(accepted=True).order_by('-date')
+    elif filter == 'rejected':
+        reports = Report.objects.filter(accepted=False).order_by('-date')
+    elif filter == 'notviewed':
+        reports = Report.objects.filter(accepted=None).order_by('-date')
+    elif filter == 'all':
+        reports = Report.objects.all().order_by('-date')
+    else:
+        raise Http404()
+    return render(request, 'AlchemyAdmin/feedback_list.html', { 'report_list': reports })
+
 
 @permission_required('AlchemyCommon.can_delete_element', login_url='/login/', raise_exception=True)
 def remove_element(request, el_id):

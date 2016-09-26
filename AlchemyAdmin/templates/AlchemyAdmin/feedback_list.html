@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 
 {% block title %}
 	Жалобы/предложения
@@ -13,7 +14,15 @@
 		<div class="btn-group text-center">
 			<a type="button" class="btn btn-lg btn-default" href="{% url 'aladmin:elements-list' %}">Список элементов</a>
 			<a type="button" class="btn btn-lg btn-default" href="{% url 'aladmin:users-list' %}">Список пользователей</a>
-			<a type="button" class="btn btn-lg btn-primary active" href="{% url 'aladmin:feedback-list' %}">Жалобы/предложения</a>
+			<a type="button" class="btn btn-lg btn-primary active" href="{% url 'aladmin:feedback-list' 'all' %}">Жалобы/предложения</a>
+		</div>
+	</div>
+	<div class="text-center">
+		<div class="btn-group text-center">
+			<a type="button" class="btn btn-sm btn-default" href="{% url 'aladmin:feedback-list' 'all' %}">Все</a>
+			<a type="button" class="btn btn-sm btn-default" href="{% url 'aladmin:feedback-list' 'accepted' %}">Принятые</a>
+			<a type="button" class="btn btn-sm btn-default" href="{% url 'aladmin:feedback-list' 'rejected' %}">Отклоненные</a>
+			<a type="button" class="btn btn-sm btn-default" href="{% url 'aladmin:feedback-list' 'notviewed' %}">Не просмотренные</a>
 		</div>
 	</div>
 	<div class="form-group pull-right">
@@ -25,22 +34,34 @@
 			<tr>
 				<th>Пользователь</th>
 				<th>Обращение</th>
+				<th>Создан</th>
 				<th>Действие</th>
 			</tr>
-			<td colspan="3">
-				Отзывы не найдены
-			</td>
 		</thead>
 
 		<tbody>
-			<tr>
-				<td></td>
-				<td></td>
-				<td>
-					<a href="#" class="btn btn-sm btn-success">✓</a>
-					<a href="#" class="btn btn-sm btn-danger">X</a>
+			{% for report in report_list %}
+				{% if report.accepted %}
+					<tr class="bg-info">
+				{% elif report.accepted == None %}
+					<tr>
+				{% else %}
+					<tr class="bg-danger">
+				{% endif %}
+						<td>{{report.user.get_username}}</td>
+						<td>{{report.text|slice:":20"}}...</td>
+						<td>{{report.date|naturaltime}}</td>
+						<td>
+							<a href="#" class="btn btn-sm btn-primary">More</a>
+							<a href="#" class="btn btn-sm btn-success">✓</a>
+							<a href="#" class="btn btn-sm btn-danger">X</a>
+						</td>
+					</tr>
+			{% empty %}
+				<td colspan="3">
+					Отзывы не найдены
 				</td>
-			</tr>
+			{% endfor %}
 		</tbody>
 	</table>
 {% endblock %}
