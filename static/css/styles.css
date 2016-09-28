@@ -47,14 +47,6 @@ body {
   opacity: 0.5;
 }
 
-.results tr[visible='false'], .no-result {
-  display: none;
-}
-
-.results tr[visible='true'] {
-  display: table-row;
-}
-
 .counter {
   padding: 8px;
   opacity: 0.5;
@@ -63,4 +55,12 @@ body {
 .errorlist {
   list-style-type: none;
   margin: 0;
+}
+
+.dataTables_wrapper {
+  margin: 10px 0;
+}
+
+.dataTables_filter {
+  float: right;
 }

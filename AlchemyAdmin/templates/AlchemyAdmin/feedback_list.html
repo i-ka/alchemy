@@ -6,30 +6,26 @@
 {% endblock %}
 
 {%block javascript%}
-	<script src="/static/js/table_search.js"></script>
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 {%endblock%}
 
 {% block center %}
 	<div class="text-center">
-		<div class="btn-group text-center">
+		<div class="btn-group">
 			<a type="button" class="btn btn-lg btn-default" href="{% url 'aladmin:elements-list' %}">Список элементов</a>
 			<a type="button" class="btn btn-lg btn-default" href="{% url 'aladmin:users-list' %}">Список пользователей</a>
 			<a type="button" class="btn btn-lg btn-primary active" href="{% url 'aladmin:feedback-list' 'all' %}">Жалобы/предложения</a>
 		</div>
-	</div>
-	<div class="text-center">
-		<div class="btn-group text-center">
+		<br>
+		<div class="btn-group">
 			<a type="button" class="btn btn-sm btn-default" href="{% url 'aladmin:feedback-list' 'all' %}">Все</a>
 			<a type="button" class="btn btn-sm btn-default" href="{% url 'aladmin:feedback-list' 'accepted' %}">Принятые</a>
 			<a type="button" class="btn btn-sm btn-default" href="{% url 'aladmin:feedback-list' 'rejected' %}">Отклоненные</a>
 			<a type="button" class="btn btn-sm btn-default" href="{% url 'aladmin:feedback-list' 'notviewed' %}">Не просмотренные</a>
 		</div>
 	</div>
-	<div class="form-group pull-right">
-		<input type="text" class="search form-control" placeholder="Поиск...">
-	</div>
-	<span class="counter pull-right"></span>
-	<table class="table table-condensed table-hover results">
+	<table class="table table-condensed table-hover">
 		<thead>
 			<tr>
 				<th>Пользователь</th>
@@ -57,9 +53,9 @@
 							<a href="{% url 'aladmin:set-report' report.id 'rejected' %}?next={{request.path}}" class="btn btn-sm btn-danger">X</a>
 						</td>
 					</tr>
-			{% empty %}
-				<td colspan="3">
-					Отзывы не найдены
+				{% empty %}
+				<td colspan="4">
+					Список отзывов пуст
 				</td>
 			{% endfor %}
 		</tbody>

@@ -5,7 +5,8 @@
 {% endblock %}
 
 {%block javascript%}
-	<script src="/static/js/table_search.js"></script>
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 {%endblock%}
 
 {% block center %}
@@ -17,17 +18,13 @@
 		</div>
 	</div>
 
-	<a class="btn btn-success pull-left" href="{% url 'aladmin:create-element' %}">Добавить элемент</a>
-	<div class="form-group pull-right">
-		<input type="text" class="search form-control" placeholder="Поиск...">
-	</div>
-	<span class="counter pull-right"></span>
+	<a class="btn btn-success" href="{% url 'aladmin:create-element' %}">Добавить элемент</a>
 	{%if error%}
 		<div class="text-center text-danger">
 			<h4>Чтобы удалить элемент {{element_to_delete.name}} удалите или измените следующие элементы</h4>
 		</div>
 	{%endif%}	
-		<table class="table table-condensed table-hover results">
+		<table class="table table-condensed table-hover">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -37,11 +34,6 @@
 					<th>Описание</th>
 					<th>Действие</th>
 				</tr>
-				<tr class="warning no-result">
-				<td colspan="6">
-					Элементы не найдены
-				</td>
-			</tr>
 			</thead>
 		 
 			<tbody>	
@@ -63,7 +55,10 @@
 						<a href="{% url 'aladmin:del' element.id %}" class="btn btn-sm btn-danger">Удалить</a>
 					</td>
 				</tr>
-			{% empty %}Список элементов пуст
+				{% empty %}
+				<td colspan="6">
+					Список элементов пуст
+				</td>
 			{% endfor %}
 			</tbody>
 		</table>

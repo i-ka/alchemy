@@ -5,7 +5,8 @@
 {% endblock %}
 
 {%block javascript%}
-	<script src="/static/js/table_search.js"></script>
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 {%endblock%}
 
 {% block center %}
@@ -16,20 +17,11 @@
 			<a type="button" class="btn btn-lg btn-default" href="{% url 'aladmin:feedback-list' 'all' %}">Жалобы/предложения</a>
 		</div>
 	</div>
-	<div class="form-group pull-right">
-		<input type="text" class="search form-control" placeholder="Поиск...">
-	</div>
-	<span class="counter pull-right"></span>
-	<table class="table table-condensed table-hover results">
+	<table class="table table-condensed table-hover">
 			<thead>
 			<tr>
 				<th>Пользователь</th>
 				<th>Действие</th>
-			</tr>
-			<tr class="warning no-result">
-				<td colspan="2">
-					Пользователи не найдены
-				</td>
 			</tr>
 		</thead>
 
@@ -53,6 +45,10 @@
 				{% endif %}
 				</td>
 			</tr>
+			{% empty %}
+			<td colspan="2">
+				Список пользователей пуст
+			</td>
 		{% endfor %}
 		</tbody>
 	</table>

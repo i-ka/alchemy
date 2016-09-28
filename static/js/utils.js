@@ -12,3 +12,13 @@ function getCookie(name) {
   }
   return cookieValue;
 }
+
+$(document).ready(function() {
+  if (document.location.pathname.indexOf("list") != -1) {
+    $("table").dataTable({
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Russian.json"
+      }
+    });
+  }
+});
