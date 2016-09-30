@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'create-category', views.create_category, name='create-category'),
     url(r'set-user-active/(?P<userId>[0-9]+)/(?P<active>[0-9])', views.set_user_active, name='set-user-active'),
     url(r'set-report/(?P<reportId>[0-9]+)/(?P<val>[(accepted) (rejected)]+)', views.set_report, name='set-report'),
+    url(r'report-details/(?P<reportId>[0-9]+)', views.report_details, name='report-details'),
 ]

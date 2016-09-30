@@ -76,6 +76,12 @@ def set_report(request, reportId, val):
         return redirect(reverse('aladmin:feedback-list', args=('all',)))
 
 
+@permission_required('AlchemyCommon.can_change_report', raise_exception=True)
+def report_details(request, reportId):
+    report = get_object_or_404(Report, pk=reportId)
+    return render(request, 'AlchemyAdmin/report_details.html', {'report': report})
+
+
 @permission_required('AlchemyCommon.can_delete_element', login_url='/login/', raise_exception=True)
 def remove_element(request, el_id):
     element_to_delete = Element.objects.get(pk=el_id)

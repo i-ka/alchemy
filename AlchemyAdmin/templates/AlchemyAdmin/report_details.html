@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}
+	Отзыв #{{report.id}}
+{% endblock %}
+
+{% block center %}
+	<div class="form-signin center-block well">
+		<div class="form-group">
+			<label>Пользователь:</label>
+			{{report.user.get_username}}
+			<label>Статус:</label>
+			{% if report.accepted %}
+				Принят
+			{% elif report.accepted == None %}
+				Не просмотрен
+			{% else %}
+				Отклонен
+			{% endif %}
+		</div>
+		<div class="form-group">
+			<label>Дата изменения:</label>
+			{{report.date|naturaltime}}
+		</div>
+		<div class="form-group">
+			<label>Отзыв:</label>
+			{{report.text}}
+		</div>
+		<div class="form-group">
+			<label>Скриншот:</label>
+			{% if report.screenshot %}
+				<a href="{{report.screenshot.url}}" target="_blank"><img class="img-thumbnail" src="{{report.screenshot.url}}"></a>
+			{% else %}
+					Нет скриншота
+			{% endif %}
+		</div>
+		<a href="{% url 'aladmin:set-report' report.id 'accepted' %}?next={{request.path}}" class="btn btn-sm btn-success">Принять</a>
+		<a href="{% url 'aladmin:set-report' report.id 'rejected' %}?next={{request.path}}" class="btn btn-sm btn-danger">Отклонить</a>
+	</div>
+{% endblock %}
