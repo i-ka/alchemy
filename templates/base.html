@@ -52,6 +52,7 @@
 		</div>
 	</div>
 <!--Content-->
+	{% if not user.is_authenticated %}
 	<div class="modal fade" id="login-modal" role="dialog">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
@@ -73,6 +74,7 @@
 			</div>
 		</div>
 	</div>
+	{% endif %}
 
 	<div class="container">
 		<div class="row">
