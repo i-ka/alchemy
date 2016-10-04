@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from AlchemyCommon.models import Element, Category, User, Report
 from .forms import ElementForm
 from django.http import HttpResponse, Http404
+from AlchemyCommon.utils import redirect_to_next
 # Create your views here.
 
 
@@ -69,17 +70,20 @@ def set_report(request, reportId, val):
     if value != rep.accepted:
         rep.accepted = value
         rep.save()
-    redirect_url = request.GET.get('next', False)
-    if redirect_url:
-        return redirect(redirect_url)
-    else:
-        return redirect(reverse('aladmin:feedback-list', args=('all',)))
+    return redirect_to_next(request, reverse('aladmin:feedback-list', args=('all',)))
 
 
 @permission_required('AlchemyCommon.can_change_report', raise_exception=True)
 def report_details(request, reportId):
     report = get_object_or_404(Report, pk=reportId)
     return render(request, 'AlchemyAdmin/report_details.html', {'report': report})
+
+
+@permission_required('AlchemyCommon.can_delete_report', raise_exception=True)
+def delete_report(request, reportId):
+    report = get_object_or_404(Report, pk=reportId)
+    report.delete()
+    return redirect_to_next(request, reverse('aladmin:feedback-list', args=('all',)))
 
 
 @permission_required('AlchemyCommon.can_delete_element', login_url='/login/', raise_exception=True)

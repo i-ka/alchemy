@@ -37,5 +37,6 @@
 		</div>
 		<a href="{% url 'aladmin:set-report' report.id 'accepted' %}?next={{request.path}}" class="btn btn-sm btn-success">Принять</a>
 		<a href="{% url 'aladmin:set-report' report.id 'rejected' %}?next={{request.path}}" class="btn btn-sm btn-danger">Отклонить</a>
+		<a href="{% url 'aladmin:delete-report' report.id %}" class="btn btn-sm btn-danger">Удалить</a>
 	</div>
 {% endblock %}
