@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save, pre_delete
+import os
 # Create your models here.
 
+from alchemysite import settings
 
 class Category(models.Model):
     name = models.CharField(max_length=50,
@@ -48,6 +50,41 @@ class Report(models.Model):
     text = models.TextField(max_length=500, blank=False)
     screenshot = models.ImageField(upload_to='report_screenshots/', blank=True)
     date = models.DateTimeField(auto_now=True)
+
+
+    def delete_image(self):
+        if self.screenshot:
+            try:
+                os.remove(settings.BASE_DIR + self.screenshot.url.replace('/', '\\'))
+            except FileNotFoundError:
+                pass
+            self.screenshot = None
+            self.save()
+
+
+@receiver(pre_save, sender=Report)
+def report_pre_save(sender, instance, **kwargs):
+    if not instance.screenshot:
+        return
+
+    reports = Report.objects.all().order_by('-date')
+    reports_with_scr_count = 0
+    first_report_with_screen = None
+    for report in reports:
+        if report.screenshot:
+            first_report_with_screen = report
+            reports_with_scr_count += 1
+
+    if first_report_with_screen and first_report_with_screen.id == instance.id:
+        return
+
+    if reports_with_scr_count >= settings.MAX_REPORT_SCREENS:
+        first_report_with_screen.delete_image()
+
+
+@receiver(pre_delete, sender=Report)
+def report_pre_delete(sender, instance, **kwargs):
+    instance.delete_image()
 
 
 class UserProfile(models.Model):

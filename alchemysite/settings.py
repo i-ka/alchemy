@@ -132,6 +132,7 @@ else:
 #Custom settings
 EMAIL_CONFIRM = False
 DOMAIN = 'http:\\127.0.0.1:8000'
+MAX_REPORT_SCREENS = 4
 
 #Mediafiles settings
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
