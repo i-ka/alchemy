@@ -64,3 +64,8 @@ body {
 .dataTables_filter {
   float: right;
 }
+
+.img-thumbnail {
+  width: 20%;
+  height: 20%;
+}

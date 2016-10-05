@@ -6,20 +6,22 @@
 {% endblock %}
 
 {% block center %}
-	<div class="form-signin center-block well">
-		<div class="form-group">
+	<div class="center-block well text-center">
+		<div class="form-group col-xs-4">
 			<label>Пользователь:</label>
 			{{report.user.get_username}}
+		</div>
+		<div class="form-group col-xs-4">
 			<label>Статус:</label>
 			{% if report.accepted %}
-				Принят
+				<b class="text-success">Принят</b>
 			{% elif report.accepted == None %}
-				Не просмотрен
+				<b class="text-muted">Не просмотрен</b>
 			{% else %}
-				Отклонен
+				<b class="text-danger">Отклонен</b>
 			{% endif %}
 		</div>
-		<div class="form-group">
+		<div class="form-group col-xs-4">
 			<label>Дата изменения:</label>
 			{{report.date|naturaltime}}
 		</div>
@@ -27,14 +29,12 @@
 			<label>Отзыв:</label>
 			{{report.text}}
 		</div>
-		<div class="form-group">
-			<label>Скриншот:</label>
-			{% if report.screenshot %}
-				<a href="{{report.screenshot.url}}" target="_blank"><img class="img-thumbnail" src="{{report.screenshot.url}}"></a>
-			{% else %}
-					Нет скриншота
-			{% endif %}
-		</div>
+		{% if report.screenshot %}
+			<div class="form-group col-xs-12">
+				<label>Скриншот:</label>
+				<a href="{{report.screenshot.url}}" target="_blank"><img class="img-thumbnail w-1" src="{{report.screenshot.url}}"></a>
+			</div>
+		{% endif %}
 		<a href="{% url 'aladmin:feedback-list' 'all' %}" class="btn btn-sm btn-default">К списку</a>
 		<a href="{% url 'aladmin:set-report' report.id 'accepted' %}?next={{request.path}}" class="btn btn-sm btn-success">Принять</a>
 		<a href="{% url 'aladmin:set-report' report.id 'rejected' %}?next={{request.path}}" class="btn btn-sm btn-danger">Отклонить</a>
