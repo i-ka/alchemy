@@ -43,6 +43,15 @@ class Element(models.Model):
         else:
             return conflict_elements
 
+    def dict(self):
+        return {'id': self.id,
+                'name': self.name,
+                'first_recipe_el': self.first_recipe_el,
+                'second_recipe_el': self.second_recipe_el,
+                'description': self.description,
+                'category': self.category.id,
+                'created_at': str(self.created_at)}
+
 
 class Report(models.Model):
     user = models.ForeignKey(User)
