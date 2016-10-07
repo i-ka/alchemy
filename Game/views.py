@@ -146,8 +146,8 @@ def check_element(request):
 
     if request.method == 'POST':
         result = {'success': False}
-        element1 = int(request.POST['first_element'])
-        element2 = int(request.POST['second_element'])
+        element1 = int(request.POST.get('first_element', False))
+        element2 = int(request.POST.get('second_element', False))
         if element1 > element2:
             element1, element2 = element2, element1
         try:
