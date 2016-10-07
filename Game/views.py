@@ -100,12 +100,8 @@ def get_categories(request):
 def element_list(request, category_id):
     elements_dict = {"elements": []}
     elements = Category.objects.get(pk=category_id).element_set.all()
-    for el in elements:
-        elements_dict['elements'].append({
-            'image': 'qwer.jpg',
-            'name': el.name,
-            'id': el.id
-            })
+    for element in elements:
+        elements_dict['elements'].append(element.dict())
     return HttpResponse(json.dumps(elements_dict))
 
 
@@ -118,11 +114,7 @@ def get_user_open_element_list(request, category_id):
 	userOpenElements = request.user.profile.open_elements.all()
 	for element in userOpenElements:
 		if (element.category.id == category_id):
-			openElementsDict['elements'].append({
-				'id': element.id,
-				'name': element.name,
-				'image': 'element.image'
-				})
+			openElementsDict['elements'].append(element.dict())
 	return HttpResponse(json.dumps(openElementsDict))
 
 
@@ -162,9 +154,7 @@ def check_element(request):
 
         if element1obj in userOpenElements.all() and element2obj in userOpenElements.all():
             result['success'] = True
-            result['newElement'] = {'id': resultElement.id,
-                                    'name': resultElement.name,
-                                    'image': 'qwe.jpg'}
+            result['newElement'] = resultElement.dict()
             userOpenElements.add(resultElement)
             return HttpResponse(json.dumps(result))
         else:
