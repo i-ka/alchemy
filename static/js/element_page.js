@@ -1,8 +1,8 @@
 function dropsFill() {
   if ($("[name=first_recipe_el]").val() != "" && $("[name=second_recipe_el]").val() != "") {
     if ($("[name=first_recipe_el]").val() != 0 && $("[name=second_recipe_el]").val() != 0) {
-      $("#drop1").text($("[el_id = " + $("[name=first_recipe_el]").val() + "]").text());
-      $("#drop2").text($("[el_id = " + $("[name=second_recipe_el]").val() + "]").text());
+      $("#drop1").text(arrElements[$("[name=first_recipe_el]").val()].name);
+      $("#drop2").text(arrElements[$("[name=second_recipe_el]").val()].name);
       $("#drop1, #drop2").removeClass("btn-default").addClass("btn-info");
     } else {
       $("[name=orig_check]").attr("checked", true);
@@ -29,8 +29,7 @@ $(document).ready(function() {
           break;
       }
       if (error != "noErrors") {
-        $("#add-category-error").show();
-        $("#add-category-error").text(error);
+        $("#add-category-error").show().text(error);
       }
     });
   });
@@ -41,20 +40,19 @@ $(document).ready(function() {
       $("[name=first_recipe_el]").val($(".ui-draggable-dragging").attr("el_id"));
       $(this).removeClass("btn-default").addClass("btn-info");
     }
+  }).click(function() {
+    $(this).text("Элемент 1");
+    $("[name=first_recipe_el]").removeAttr("value");
+    $(this).removeClass("btn-info").addClass("btn-default");
   });
+
   $("#drop2").droppable({
     drop: function() {
       $(this).text($(".ui-draggable-dragging").text());
       $("[name=second_recipe_el]").val($(".ui-draggable-dragging").attr("el_id"));
       $(this).removeClass("btn-default").addClass("btn-info");
     }
-  });
-  $("#drop1").click(function() {
-    $(this).text("Элемент 1");
-    $("[name=first_recipe_el]").removeAttr("value");
-    $(this).removeClass("btn-info").addClass("btn-default");
-  });
-  $("#drop2").click(function() {
+  }).click(function() {
     $(this).text("Элемент 2");
     $("[name=second_recipe_el]").removeAttr("value");
     $(this).removeClass("btn-info").addClass("btn-default");
