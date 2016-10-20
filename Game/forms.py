@@ -11,7 +11,7 @@ from AlchemyCommon.utils import getActivationEmailText
 class RegisterForm(forms.Form):
 
     username = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class': 'form-control',
-                                                                            'placeholder':'Username'}))
+                                                                            'placeholder':'Имя пользователя'}))
     email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control',
                                                             'placeholder':'Email'}))
 
@@ -19,11 +19,11 @@ class RegisterForm(forms.Form):
                             min_length=6,
                             max_length=30,
                             widget=forms.PasswordInput(attrs={'class':'form-control',
-                                                              'placeholder':'Password'}))
+                                                              'placeholder':'Пароль'}))
 
     pass2 = forms.CharField(label="Пароль ещё раз",
                             widget=forms.PasswordInput(attrs={'class':'form-control',
-                                                                'placeholder':'Repeat Password'}))
+                                                                'placeholder':'Пароль еще раз'}))
     def save(self):
         user = User(username=self.cleaned_data['username'],
                     email=self.cleaned_data['email'])
