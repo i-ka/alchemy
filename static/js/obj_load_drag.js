@@ -1,3 +1,5 @@
+var arrElements = [];
+
 function elementLoad(categoryId, isLast) {
   var request;
   if (document.getElementById("board")) {
@@ -7,6 +9,14 @@ function elementLoad(categoryId, isLast) {
   }
   $.getJSON( request + categoryId,function(elementData) {
     for (var j = 0; j < elementData.elements.length; j++) {
+      arrElements[elementData.elements[j].id] = {
+        id: elementData.elements[j].id,
+        name: elementData.elements[j].name,
+        first_recipe_el: elementData.elements[j].first_recipe_el,
+        second_recipe_el: elementData.elements[j].second_recipe_el,
+        description: elementData.elements[j].description,
+        category: elementData.elements[j].category.id
+      }
       $("#" + categoryId).append($("<a>").addClass("btn btn-default select").text(elementData.elements[j].name).attr("el_id", elementData.elements[j].id));
       $(".select").draggable({ helper: "clone" });
     }
