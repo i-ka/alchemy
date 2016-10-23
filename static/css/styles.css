@@ -15,6 +15,8 @@ body {
 
 #board {
   height: 80vh;
+  display: flex;
+  flex-direction: column;
 }
 
 #board  a {
@@ -32,23 +34,19 @@ body {
 }
 
 #clearall {
-  float: right;
+  order: 0;
+  margin-left: auto;
   width: 80px;
   height: 80px;
+  padding: 0;
   background: url(../img/trash.png);
   background-repeat: no-repeat;
   background-position: center;
 }
 
 #lastElems {
-  position: relative;
-  float: left;
-  top: 98%;
-  opacity: 0.5;
-}
-
-.counter {
-  padding: 8px;
+  order: 1;
+  margin-top: auto;
   opacity: 0.5;
 }
 
