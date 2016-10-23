@@ -18,7 +18,9 @@ function elementLoad(categoryId, isLast) {
         category: elementData.elements[j].category.id
       }
       $("#" + categoryId).append($("<a>").addClass("btn btn-default select").text(elementData.elements[j].name).attr("el_id", elementData.elements[j].id));
-      $(".select").draggable({ helper: "clone" });
+      $(".select").draggable({ helper: "clone" }).click(function() {
+        $("#lastElems").text(arrElements[$(this).attr("el_id")].description);
+      });
     }
     if (isLast && !document.getElementById("board")) {
       dropsFill();
