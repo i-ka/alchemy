@@ -14,7 +14,7 @@ body {
 }
 
 #board {
-  height: 80vh;
+  height: 75vh;
   display: flex;
   flex-direction: column;
 }
@@ -66,4 +66,9 @@ body {
 .img-thumbnail {
   width: 20%;
   height: 20%;
+}
+
+.tab-pane {
+  max-height: 80px;
+  overflow-y: auto;
 }
