@@ -38,7 +38,7 @@ $(document).ready(function() {
           }
         }
       }).click(function() {
-        $("#lastElems").text(arrElements[$(this).attr("el_id")].description);
+        $("#lastElems").html("<b>" + arrElements[$(this).attr("el_id")].name + "</b> - " + arrElements[$(this).attr("el_id")].description);
       });
     }
   });
