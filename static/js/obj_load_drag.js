@@ -5,7 +5,7 @@ function elementLoad(categoryId, isLast) {
   if (document.getElementById("board")) {
     request = "/get-open-elements-by-category/";
   } else {
-    request = "/get-elements-by-category/";
+    request = "alch-admin/get-elements-by-category/";
   }
   $.getJSON( request + categoryId,function(elementData) {
     for (var j = 0; j < elementData.elements.length; j++) {

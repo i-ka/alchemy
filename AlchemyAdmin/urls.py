@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'set-report/(?P<reportId>[0-9]+)/(?P<val>[(accepted) (rejected)]+)', views.set_report, name='set-report'),
     url(r'report-details/(?P<reportId>[0-9]+)', views.report_details, name='report-details'),
     url(r'delete-report/(?P<reportId>[0-9]+)', views.delete_report, name='delete-report'),
+    url(r'get-elements-by-category/(?P<category_id>[0-9]+)', views.element_list, name='get-elements-by-cat'),
 ]

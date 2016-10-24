@@ -5,6 +5,7 @@ from AlchemyCommon.models import Element, Category, User, Report
 from .forms import ElementForm
 from django.http import HttpResponse, Http404
 from AlchemyCommon.utils import redirect_to_next
+import json
 # Create your views here.
 
 
@@ -144,3 +145,12 @@ def create_category(request):
         return HttpResponse('success')
     else:
         return HttpResponse('failed')
+
+
+@permission_required('AlchemyCommon.can_change_element', login_url='/login/', raise_exception=True)
+def element_list(request, category_id):
+    elements_dict = {"elements": []}
+    elements = Category.objects.get(pk=category_id).element_set.all()
+    for element in elements:
+        elements_dict['elements'].append(element.dict())
+    return HttpResponse(json.dumps(elements_dict))

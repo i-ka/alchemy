@@ -97,14 +97,6 @@ def get_categories(request):
     return HttpResponse(json.dumps(categories_dict))
 
 
-def element_list(request, category_id):
-    elements_dict = {"elements": []}
-    elements = Category.objects.get(pk=category_id).element_set.all()
-    for element in elements:
-        elements_dict['elements'].append(element.dict())
-    return HttpResponse(json.dumps(elements_dict))
-
-
 def get_user_open_element_list(request, category_id):
 	if not request.user.is_authenticated:
 		return HttpResponseForbidden()
