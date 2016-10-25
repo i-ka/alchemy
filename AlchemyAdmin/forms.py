@@ -48,7 +48,7 @@ class ElementForm(forms.ModelForm):
             if (self.instance):
                 query = Element.objects.filter(Q(pk=f_rec_el) | Q(pk=s_rec_el)).filter(Q(first_recipe_el=self.instance.id) | Q(second_recipe_el=self.instance.id))
                 if (query.exists()):
-                    raise forms.ValidationError("cycle dependence!")
+                    raise forms.ValidationError("Ошибка: Элемент будет невозможно создать")
                 if (s_rec_el == self.instance.id and f_rec_el == self.instance.id):
                     raise forms.ValidationError("Ошибка: Элемент не может содержать ссылку на себя")
 
