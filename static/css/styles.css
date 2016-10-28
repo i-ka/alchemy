@@ -72,3 +72,11 @@ body {
   max-height: 80px;
   overflow-y: auto;
 }
+
+.navbar-brand {
+  padding: 0;
+}
+
+#text:hover {
+  filter: url(#hoverFilter);
+}
