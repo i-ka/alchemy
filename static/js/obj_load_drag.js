@@ -7,7 +7,16 @@ function elementLoad(categoryId, isLast) {
   } else {
     request = "alch-admin/get-elements-by-category/";
   }
-  $.getJSON( request + categoryId,function(elementData) {
+  $.getJSON(request + categoryId,function(elementData) {
+    if (elementData.elements.length == 0) {
+        if (document.getElementById("board")) {
+          $("#" + categoryId).text("Пока нет открытых элементов").addClass("alert errorlist alert-info text-center");
+        } else {
+          $("#" + categoryId).text("В категории нет элементов").addClass("alert errorlist alert-info text-center");
+        }
+    } else {
+      $("#" + categoryId).text("").removeClass("alert errorlist alert-info text-center");
+    }
     for (var j = 0; j < elementData.elements.length; j++) {
       arrElements[elementData.elements[j].id] = {
         id: elementData.elements[j].id,
