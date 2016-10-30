@@ -1,13 +1,13 @@
-function addElement(id, name, mixable) {
-  if (!id) {
+function addElement(name, mixable) {
+  if (!name) { // add element from list
     $("#board").append($("<a>")
       .attr("el_id", $(".ui-draggable-dragging").attr("el_id"))
       .css("left", $(".ui-draggable-dragging").css("left"))
       .css("top", $(".ui-draggable-dragging").css("top"))
       .text($(".ui-draggable-dragging").text()));
-  } else {
+  } else { // add element after mixing
     $("#board").append($("<a>")
-      .attr("el_id", id)
+      .attr("el_id", arrElements.length)
       .css("left", mixable.css("left"))
       .css("top", mixable.css("top"))
       .text(name)
@@ -23,8 +23,8 @@ function addElement(id, name, mixable) {
       var mixable = $(this);
       var mixed = $(".ui-draggable-dragging");
       $.post("/check_elements/", {
-        first_element: mixable.attr("el_id"),
-        second_element: mixed.attr("el_id"),
+        first_element: arrElements[mixable.attr("el_id")].id,
+        second_element: arrElements[mixed.attr("el_id")].id,
         csrfmiddlewaretoken: getCookie("csrftoken")
       }, onAjaxSuccess);
 
@@ -32,10 +32,10 @@ function addElement(id, name, mixable) {
         var elementData = $.parseJSON(data);
         if (elementData.success) {
           $("#lastElems").text(mixed.text() + " + " + mixable.text() + " = " + elementData.newElement.name);
-          addElement(elementData.newElement.id, elementData.newElement.name, mixable);
+          addElement(elementData.newElement.name, mixable);
           mixable.remove();
           mixed.remove();
-          if (!arrElements[elementData.newElement.id]) {
+          if (!arrElements[elementData.newElement.id]) { // TODO: check somehow if element is new or was opened before
             dataUpdate();
           }
         } else {

@@ -37,7 +37,7 @@ $(document).ready(function() {
   $("#drop1").droppable({
     drop: function() {
       $(this).text($(".ui-draggable-dragging").text());
-      $("[name=first_recipe_el]").val($(".ui-draggable-dragging").attr("el_id"));
+      $("[name=first_recipe_el]").val(arrElements[$(".ui-draggable-dragging").attr("el_id")].id);
       $(this).removeClass("btn-default").addClass("btn-info");
     }
   }).click(function() {
@@ -49,7 +49,7 @@ $(document).ready(function() {
   $("#drop2").droppable({
     drop: function() {
       $(this).text($(".ui-draggable-dragging").text());
-      $("[name=second_recipe_el]").val($(".ui-draggable-dragging").attr("el_id"));
+      $("[name=second_recipe_el]").val(arrElements[$(".ui-draggable-dragging").attr("el_id")].id);
       $(this).removeClass("btn-default").addClass("btn-info");
     }
   }).click(function() {

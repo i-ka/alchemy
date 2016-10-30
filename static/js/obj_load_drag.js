@@ -18,15 +18,8 @@ function elementLoad(categoryId, isLast) {
       $("#" + categoryId).text("").removeClass("alert errorlist alert-info text-center");
     }
     for (var j = 0; j < elementData.elements.length; j++) {
-      arrElements[elementData.elements[j].id] = {
-        id: elementData.elements[j].id,
-        name: elementData.elements[j].name,
-        first_recipe_el: elementData.elements[j].first_recipe_el,
-        second_recipe_el: elementData.elements[j].second_recipe_el,
-        description: elementData.elements[j].description,
-        category: elementData.elements[j].category.id
-      }
-      $("#" + categoryId).append($("<a>").addClass("btn btn-default select").text(elementData.elements[j].name).attr("el_id", elementData.elements[j].id));
+      arrElements.push(elementData.elements[j]);  // TODO: it shouldn't push element if it already exists
+      $("#" + categoryId).append($("<a>").addClass("btn btn-default select").text(elementData.elements[j].name).attr("el_id", arrElements.length - 1));
       $(".select").draggable({ helper: "clone" }).click(function() {
         $("#lastElems").html("<b>" + arrElements[$(this).attr("el_id")].name + "</b> - " + arrElements[$(this).attr("el_id")].description);
       });
