@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -13,10 +14,14 @@ import json
 
 
 def index(request):
+    return render(request, 'Game/index.html', {"text": "1"})
+
+
+def game_page(request):
     if request.user.is_authenticated():
         return render(request, 'Game/game.html')
     else:
-        return render(request, 'Game/index.html', {"text": "1"})
+        return redirect(reverse('game:index'))
 
 
 @login_required()

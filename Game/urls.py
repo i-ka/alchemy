@@ -9,6 +9,7 @@ urlpatterns = [
         auth_views.login,
         {"template_name": "Game/loginform.html"},
         name='login'),
+    url(r'^game-page/$', views.game_page, name='game-page'),
     url(r'^logout/$', auth_views.logout_then_login, name='logout'),
     url(r'^registration/$', views.registration, name='registration'),
     url(r'get_categories', views.get_categories, name='get_categories'),
