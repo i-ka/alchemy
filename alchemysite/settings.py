@@ -82,8 +82,11 @@ WSGI_APPLICATION = 'alchemysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': ''
     }
 }
 
@@ -107,9 +110,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,'static'),
-    )
+STATIC_ROOT = '/home/alchemy/alchemy/static'
 
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL='/'
