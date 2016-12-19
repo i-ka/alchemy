@@ -49,7 +49,7 @@
 						{{element.first_recipe_el}}+{{element.second_recipe_el}}
 						{% endif %}
 					</td>
-					<td>{{element.description}}</td>
+					<td>{{element.description|slice:":25"}}</td>
 					<td>
 						<a href="{% url 'aladmin:update-element' element.id %}" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
 						<a href="{% url 'aladmin:del' element.id %}" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
